@@ -7,11 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
+
+  tabName: string='';
   
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  selectTab(identifier: string){
+    console.log(identifier);
+    this.tabName= identifier;
   }
 
 }
