@@ -7,7 +7,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class ProfileMenuComponent implements OnInit {
 
-  onTab: EventEmitter<string> = new EventEmitter<string>();
+  onMenu: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
 
@@ -16,7 +16,7 @@ export class ProfileMenuComponent implements OnInit {
 
   menu(identifier: string){
 
-    this.onTab.emit(identifier);
+    this.onMenu.emit(identifier);
 
   }
 
