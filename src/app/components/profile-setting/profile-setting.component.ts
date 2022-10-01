@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-profile-setting',
@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile-setting.component.css']
 })
 export class ProfileSettingComponent implements OnInit {
+
+  @Input() fullName: string = '';
+  @Input() userName: string = '';
+  @Input() password: string = '';
 
   constructor() { }
 
