@@ -9,6 +9,7 @@ export class ProfileComponent implements OnInit {
 
 
   tabName: string='';
+  menuName: string='';
   
 
   constructor() { }
@@ -19,6 +20,11 @@ export class ProfileComponent implements OnInit {
   selectTab(identifier: string){
     console.log(identifier);
     this.tabName= identifier;
+  }
+
+  selectMenu(identifier: string){
+    console.log(identifier);
+    this.menuName= identifier;
   }
 
 }
