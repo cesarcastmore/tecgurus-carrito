@@ -10,6 +10,7 @@ export class ProfileSettingComponent implements OnInit {
   @Input() fullName: string = '';
   @Input() userName: string = '';
   @Input() password: string = '';
+  @Input() email: string = '';
 
   constructor() { }
 
