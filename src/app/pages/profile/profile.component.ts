@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Profile } from 'src/app/models/profile';
 
 @Component({
   selector: 'app-profile',
@@ -10,6 +11,13 @@ export class ProfileComponent implements OnInit {
 
   tabName: string='';
   menuName: string='';
+
+  profile: Profile={
+    username: 'ccastillo', 
+    email: 'ccastillo@gmail.com',
+    password: 'ccastillo',
+    fullName: 'Cesar Castillo'
+  }
   
 
   constructor() { }
