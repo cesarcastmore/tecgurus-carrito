@@ -8,6 +8,9 @@ import { Profile } from 'src/app/models/profile';
 })
 export class ProfileComponent implements OnInit {
 
+  alert: string='';
+  openAlert: boolean= false;
+
 
   tabName: string='setting';
   menuName: string='';
@@ -33,6 +36,16 @@ export class ProfileComponent implements OnInit {
   selectMenu(identifier: string){
     console.log(identifier);
     this.menuName= identifier;
+  }
+
+
+  save(isSave: boolean){
+
+    this.openAlert= true;
+
+
+
+
   }
 
 }

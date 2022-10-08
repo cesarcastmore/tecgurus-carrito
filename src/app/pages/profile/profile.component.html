@@ -1,4 +1,7 @@
 <div class="container">
+  <div class="alert alert-primary" role="alert"  [style.display]="openAlert ? 'display': 'none'">
+    {{alert}}
+  </div>
   <div class="row flex-lg-nowrap">
     <app-profile-menu (onMenu)="selectMenu($event)"></app-profile-menu>
     <div class="col">
@@ -16,7 +19,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                  <div class="col d-flex flex-column flex-sm-row justify-contecdnt-between mb-3">
                     <div class="text-center text-sm-left mb-2 mb-sm-0">
                       <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">John Smith</h4>
                       <p class="mb-0">@johnny.s</p>
