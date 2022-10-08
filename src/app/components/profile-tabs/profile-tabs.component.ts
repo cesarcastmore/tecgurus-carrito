@@ -1,4 +1,5 @@
-import { Component, OnInit, Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Tab } from 'src/app/models/tab';
 
 @Component({
   selector: 'app-profile-tabs',
@@ -7,14 +8,25 @@ import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 })
 export class ProfileTabsComponent implements OnInit {
 
-  @Output() onTab:EventEmitter<string> = new EventEmitter<string>();
+  @Output() onTab: EventEmitter<string> = new EventEmitter<string>();
+
+  tabs: Tab[] = [{
+    title: 'Settings',
+    key: 'setting'
+  }, {
+    title: 'Addresses',
+    key: 'addresses'
+  }, {
+    title: 'Orders',
+    key: 'orders'
+  }];
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  tab(identifier: string){
+  openTab(identifier: string) {
     this.onTab.emit(identifier);
   }
 
