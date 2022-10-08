@@ -4,8 +4,7 @@
 </div>
 <ul class="list-unstyled components">
   <li>
-    <app-menu [title]="menus[0].title" [path]="menus[0].path"> </app-menu>
-    <app-menu [title]="menus[1].title" [path]="menus[1].path"> </app-menu>
+    <app-menu *ngFor="let menu of menus" [title]="menu.title" [path]="menu.path"> </app-menu>
   </li>
 </ul>
 <ul class="list-unstyled CTAs">
