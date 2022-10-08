@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-profile-setting',
@@ -12,9 +12,16 @@ export class ProfileSettingComponent implements OnInit {
   @Input() password: string = '';
   @Input() email: string = '';
 
+  @Output() onSave : EventEmitter<boolean> = new EventEmitter<boolean>();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+
+  save(){
+    this.onSave.emit(true);
   }
 
 }
