@@ -9,7 +9,7 @@ import { Profile } from 'src/app/models/profile';
 export class ProfileComponent implements OnInit {
 
 
-  tabName: string='';
+  tabName: string='setting';
   menuName: string='';
 
   profile: Profile={

@@ -35,7 +35,15 @@
                   </div>
                 </div>
                 <app-profile-tabs (onTab)="selectTab($event)"></app-profile-tabs>
-                <app-profile-setting [fullName]="profile.fullName" [userName]="profile.username" [email]="profile.email"></app-profile-setting>
+
+                <app-profile-setting *ngIf="tabName==='setting'" [fullName]="profile.fullName"
+                  [userName]="profile.username" [email]="profile.email"></app-profile-setting>
+
+                <div *ngIf="tabName==='addresses'">
+                  Addresses
+                </div>
+                <div *ngIf="tabName==='orders'">Orders</div>
+
               </div>
             </div>
           </div>
