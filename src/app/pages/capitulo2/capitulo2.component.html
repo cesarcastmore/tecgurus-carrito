@@ -1,0 +1,21 @@
+<p>Interpolacion de texto</p>
+<p>{{ name }}</p>
+<p>{{ name + ' Clase' }}</p>
+
+<p>{{ numero }}</p>
+<p>{{ numero + 10}}</p>
+
+<p>{{ active ? 'Verdadero': 'Falso'}}</p>
+<p>{{ !active ? 'Verdadero': 'Falso'}}</p>
+
+<p>{{sumar()}}</p>
+<p>{{sumar2(100)}}</p>
+
+<p>DOM</p>
+<input type="{{type}}" id="lname" name="lname" [value]="name" (change)="cambio($event)"><br><br>
+<input type="submit" value="Submit" (click)="onClick($event)">
+
+<p>INPUT </p>
+<app-capitulo2-input [message]="message"></app-capitulo2-input>
+<p>OUTPUT </p>
+<app-capitulo2-output (onText)="changeText($event)"></app-capitulo2-output>

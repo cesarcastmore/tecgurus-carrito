@@ -12,6 +12,11 @@ import { ProfileMenuComponent } from './components/profile-menu/profile-menu.com
 import { ProfileTabsComponent } from './components/profile-tabs/profile-tabs.component';
 import { ProfileSettingComponent } from './components/profile-setting/profile-setting.component';
 import { ProfileSupportComponent } from './components/profile-support/profile-support.component';
+import { Capitulo2Component } from './pages/capitulo2/capitulo2.component';
+import { Capitulo2InputComponent } from './components/capitulo2-input/capitulo2-input.component';
+import { Capitulo2OutputComponent } from './components/capitulo2-output/capitulo2-output.component';
+import { Capitulo3Component } from './components/capitulo3/capitulo3.component';
+import { Capitulo4Component } from './components/capitulo4/capitulo4.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,13 @@ import { ProfileSupportComponent } from './components/profile-support/profile-su
     ProfileMenuComponent,
     ProfileTabsComponent,
     ProfileSettingComponent,
-    ProfileSupportComponent
+    ProfileSupportComponent,
+    Capitulo2Component,
+    Capitulo2InputComponent,
+    Capitulo2OutputComponent,
+    Capitulo3Component,
+    Capitulo4Component
+    
   ],
   imports: [
     BrowserModule,
