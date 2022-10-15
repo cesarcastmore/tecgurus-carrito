@@ -3,3 +3,40 @@
 <p *ngIf="identificador == 'one'"> Su valor es UNO</p>
 <p *ngIf="identificador == 'two'"> Su valor es DOS</p>
 <button class="btn btn-primary" (click)="changeIdentificador()"> Cambiar</button>
+
+
+<div *ngIf="loaded; else cargando">
+
+</div>
+
+<p>Cargando</p>
+<ng-template #cargando>
+    Estoy cargando
+</ng-template>
+
+
+<p>Directiva Ciclo</p>
+<label *ngFor="let item of lista">
+
+    {{item.name}}
+
+    <!--Mas componentes-->
+    <!--Mas DOM-->
+    <!--Mas Interporlacion de texto-->
+
+</label>
+
+<p>Directivar de Clase</p>
+<button class="btn" [ngClass]="{'btn-primary': index === 1, 'btn-secondary': index ===2,
+ 'my_class': index > 2}" (click)="siguiente()">
+    Boton
+</button>
+
+<p>Directiva de estilo</p>
+<p [ngStyle]="estilo">
+    Esto es un solo texto
+</p>
+
+<button [style.background-color]="color" *ngFor="let family of families" class="btn btn-default" (click)="setFamily(family)">
+    Cambiando familia {{family}}
+</button>

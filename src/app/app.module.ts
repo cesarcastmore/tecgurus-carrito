@@ -17,6 +17,14 @@ import { Capitulo2InputComponent } from './components/capitulo2-input/capitulo2-
 import { Capitulo2OutputComponent } from './components/capitulo2-output/capitulo2-output.component';
 import { Capitulo3Component } from './pages/capitulo3/capitulo3.component';
 import { Capitulo4Component } from './pages/capitulo4/capitulo4.component';
+import { Capitulo5Component } from './pages/capitulo5/capitulo5.component';
+
+import { Capitulo5Opcion1Component } from './components/capitulo5-opcion1/capitulo5-opcion1.component';
+import { Capitulo5Opcion2Component } from './components/capitulo5-opcion2/capitulo5-opcion2.component';
+import { Capitulo5Opcion3Component } from './components/capitulo5-opcion3/capitulo5-opcion3.component';
+import { Capitulo5Opcion4Component } from './components/capitulo5-opcion4/capitulo5-opcion4.component';
+import { Capitulo5AComponent } from './pages/capitulo5-a/capitulo5-a.component';
+import { Capitulo5BComponent } from './pages/capitulo5-b/capitulo5-b.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +42,14 @@ import { Capitulo4Component } from './pages/capitulo4/capitulo4.component';
     Capitulo2InputComponent,
     Capitulo2OutputComponent,
     Capitulo3Component,
-    Capitulo4Component
+    Capitulo4Component,
+    Capitulo5Component,
+    Capitulo5Opcion1Component,
+    Capitulo5Opcion2Component,
+    Capitulo5Opcion3Component,
+    Capitulo5Opcion4Component,
+    Capitulo5AComponent,
+    Capitulo5BComponent
     
   ],
   imports: [
