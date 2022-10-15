@@ -15,8 +15,8 @@ import { ProfileSupportComponent } from './components/profile-support/profile-su
 import { Capitulo2Component } from './pages/capitulo2/capitulo2.component';
 import { Capitulo2InputComponent } from './components/capitulo2-input/capitulo2-input.component';
 import { Capitulo2OutputComponent } from './components/capitulo2-output/capitulo2-output.component';
-import { Capitulo3Component } from './components/capitulo3/capitulo3.component';
-import { Capitulo4Component } from './components/capitulo4/capitulo4.component';
+import { Capitulo3Component } from './pages/capitulo3/capitulo3.component';
+import { Capitulo4Component } from './pages/capitulo4/capitulo4.component';
 
 @NgModule({
   declarations: [
