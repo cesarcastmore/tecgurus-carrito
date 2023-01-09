@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Profile } from 'src/app/models/profile';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-profile',
@@ -19,20 +20,33 @@ export class ProfileComponent implements OnInit {
     fullName: 'Cesar Castillo'
   }
   
+  estilo : any = {
+    display : 'none'
+  }
 
-  constructor() { }
+  constructor(private alert:AlertService) { }
 
   ngOnInit(): void {
+    setTimeout(()=>{
+      this.alert.notify('success','Se ha cargado la informacion del perfil')
+    },500)
+    
   }
 
   selectTab(identifier: string){
     console.log(identifier);
     this.tabName= identifier;
+    this.estilo.display= 'block'
+    setTimeout(()=>{
+      this.estilo.display = 'none'
+    }, 2000)
   }
 
   selectMenu(identifier: string){
     console.log(identifier);
     this.menuName= identifier;
   }
+
+ 
 
 }

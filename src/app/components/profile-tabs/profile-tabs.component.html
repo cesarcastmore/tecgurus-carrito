@@ -1,6 +1,4 @@
-<ul class="nav nav-tabs">
-    <li class="nav-item"><a href="javascript:void(0)" class="active nav-link" (click)="tab('settings')">Settings</a></li>
-    <li class="nav-item"><a href="javascript:void(0)" class="active nav-link" (click)="tab('addresses')">Addresses</a></li>
-    <li class="nav-item"><a href="javascript:void(0)" class="active nav-link" (click)="tab('orders')">Orders</a></li>
-
+<ul  class="nav nav-tabs">
+    <li *ngFor="let tab of tabs" class="nav-item">
+      <a href="javascript:void(0)" class="active nav-link" (click)="pressTab(tab.value)">{{tab.tittle}}</a></li>
   </ul>

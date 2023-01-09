@@ -1,0 +1,20 @@
+<div [formGroup] = "form">
+    <input type = "text" class="form-control" formControlName="username">
+    <label *ngIf="form.get('username')?.hasError('required')">El usuario es obligatorio</label>
+    <label *ngIf="form.get('username')?.hasError('email')">El usuario debe ser un correo</label>
+    <input type = "password" class="form-control" formControlName="password">
+    <label *ngIf="form.get('password')?.hasError('required')">El password es obligatorio</label>
+    <button (click)="limpiar()" class="btn btn-primary" [disabled]="!form.valid">Limpiar</button>
+    <button (click)="login()" class="btn btn-primary" [disabled]="!form.valid">Inicio sesion</button>
+    <button (click)="setDefault()" class="btn btn-primary" [disabled]="!form.valid">Valores por defecto</button>
+
+    <input type = "number" class="form-control" formControlName="precio">
+
+    <label *ngIf="isMessage">Esta en el rango</label>
+    <button (click)="login2()" class="btn btn-primary">Inicio sesion2</button>
+</div>
+
+{{form.value | json}}
+{{form.valid | json}}
+
+<label>{{contador}}</label>

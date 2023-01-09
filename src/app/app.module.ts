@@ -18,13 +18,19 @@ import { Capitulo2OutputComponent } from './components/capitulo2-output/capitulo
 import { Capitulo3Component } from './pages/capitulo3/capitulo3.component';
 import { Capitulo4Component } from './pages/capitulo4/capitulo4.component';
 import { Capitulo5Component } from './pages/capitulo5/capitulo5.component';
-
-import { Capitulo5Opcion1Component } from './components/capitulo5-opcion1/capitulo5-opcion1.component';
-import { Capitulo5Opcion2Component } from './components/capitulo5-opcion2/capitulo5-opcion2.component';
-import { Capitulo5Opcion3Component } from './components/capitulo5-opcion3/capitulo5-opcion3.component';
-import { Capitulo5Opcion4Component } from './components/capitulo5-opcion4/capitulo5-opcion4.component';
-import { Capitulo5AComponent } from './pages/capitulo5-a/capitulo5-a.component';
-import { Capitulo5BComponent } from './pages/capitulo5-b/capitulo5-b.component';
+import { TecgurusComponent } from './pages/tecgurus/tecgurus.component';
+import { ProductDetailsComponent } from './pages/product-details/product-details.component';
+import { Capitulo6Component } from './components/capitulo6/capitulo6.component';
+import { FormatoPipe } from './pipes/formato.pipe';
+import { BuscadorPipe } from './pipes/buscador.pipe';
+import { ReactiveFormsModule } from '@angular/forms';
+import { Capitulo7Component } from './pages/capitulo7/capitulo7.component';
+import { Capitulo9Component } from './pages/capitulo9/capitulo9.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CategorizarPipe } from './pipes/categorizar.pipe';
+import { CarritoComponent } from './pages/carrito/carrito.component';
+import { CarritoLineaComponent } from './components/carrito-linea/carrito-linea.component';
+import { InventarioComponent } from './pages/inventario/inventario.component';
 
 @NgModule({
   declarations: [
@@ -44,17 +50,23 @@ import { Capitulo5BComponent } from './pages/capitulo5-b/capitulo5-b.component';
     Capitulo3Component,
     Capitulo4Component,
     Capitulo5Component,
-    Capitulo5Opcion1Component,
-    Capitulo5Opcion2Component,
-    Capitulo5Opcion3Component,
-    Capitulo5Opcion4Component,
-    Capitulo5AComponent,
-    Capitulo5BComponent
-    
+    TecgurusComponent,
+    ProductDetailsComponent,
+    Capitulo6Component,
+    FormatoPipe,
+    BuscadorPipe,
+    Capitulo7Component,
+    Capitulo9Component,
+    CategorizarPipe,
+    CarritoComponent,
+    CarritoLineaComponent,
+    InventarioComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

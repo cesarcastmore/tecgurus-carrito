@@ -1,0 +1,19 @@
+<table class="table">
+    <thead>
+      <tr>
+        <td>Producto</td>
+        <td>Venta en totales</td>
+        <td>Cantidad de productos Vendidos</td>
+        <td>Cantidad actual</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let inventario of inventarios" [ngClass]="{'emergencia': inventario.stock === 0 , 'advertencia': inventario.stock >0 && inventario.stock <=10 }">
+        <td>{{inventario.nombre}}</td>
+        <td>{{inventario.ventastotales}}</td>
+        <td>{{inventario.cantidadvendidos}}</td>
+        <td>{{inventario.stock}}</td>
+
+      </tr>
+    </tbody>
+  </table>

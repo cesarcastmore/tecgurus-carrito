@@ -3,11 +3,10 @@
   <hr>
 </div>
 <ul class="list-unstyled components">
-  <li>
-    <app-menu [title]="menus[0].title" [path]="menus[0].path"> </app-menu>
-    <app-menu [title]="menus[1].title" [path]="menus[1].path"> </app-menu>
+  <li *ngFor="let menu of menus">
+    <app-menu [title]="menu.title" [path]="menu.path"> </app-menu>
   </li>
 </ul>
 <ul class="list-unstyled CTAs">
-  <li> <a class="btn btn-default">Cerrar</a> </li>
+  <li> <a class="btn btn-default" href="javascript:void(0)" (click)="closeSesion()">Cerrar</a> </li>
 </ul>

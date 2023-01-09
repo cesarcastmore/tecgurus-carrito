@@ -1,4 +1,7 @@
 <div class="container">
+  <div class="alert alert-primary" role="alert" [ngStyle]="estilo">
+    Haz dado click a la pestaña {{tabName}}
+  </div>
   <div class="row flex-lg-nowrap">
     <app-profile-menu (onMenu)="selectMenu($event)"></app-profile-menu>
     <div class="col">
@@ -35,8 +38,12 @@
                   </div>
                 </div>
                 <app-profile-tabs (onTab)="selectTab($event)"></app-profile-tabs>
-                <app-profile-setting [fullName]="profile.fullName" [userName]="profile.username" [email]="profile.email"></app-profile-setting>
+                <app-profile-setting *ngIf="tabName === 'setting'" [fullName]="profile.fullName"
+                  [userName]="profile.username" [email]="profile.email"></app-profile-setting>
+                <div *ngIf="tabName === 'address'"> Direcciones</div>
+                <div *ngIf="tabName === 'orders'"> Ordenes</div>
               </div>
+
             </div>
           </div>
         </div>

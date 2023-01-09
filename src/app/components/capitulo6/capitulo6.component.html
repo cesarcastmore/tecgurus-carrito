@@ -1,0 +1,23 @@
+<label>Directiva de numero</label>
+<p>
+{{numerico | number: '0.0-3'}}
+{{numerico2 | number: '0.2-2'}}
+</p>
+<p>
+<label>Directiva de fecha</label>
+{{fecha1 | date: 'dd-MM-yyyy'}}
+{{fecha2 | date: 'dd/MM/yyyy'}}
+</p>
+<p>
+<label>Directiva de JSON</label>
+
+{{usuario | json}}
+</p>
+
+<p>
+    <label>Directiva custom string</label>
+    
+    {{'Titulo' | formato}}
+    {{'Titulo' | formato: 'm'}}
+    {{'Titulo' | formato: 'M'}}
+    </p>
