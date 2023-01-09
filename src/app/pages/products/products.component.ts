@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Categoria } from 'src/app/models/categoria';
 import { Product } from 'src/app/models/product';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { ProductosService } from 'src/app/services/productos.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-products',
@@ -16,8 +17,11 @@ export class ProductsComponent implements OnInit {
   categorizarPor: Categoria | null=null;
 
   consulta: string = '';
+  modalRef?: BsModalRef;
 
-  constructor(private productService: ProductosService, private carrito: CarritoService) {
+
+  constructor(private productService: ProductosService, private carrito: CarritoService,
+    private modalService: BsModalService) {
 
    }
 
@@ -50,5 +54,10 @@ export class ProductsComponent implements OnInit {
 
     })
 
+  }
+
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 }
