@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Profile } from 'src/app/models/profile';
 import { AlertService } from 'src/app/services/alert.service';
 
@@ -10,21 +11,11 @@ import { AlertService } from 'src/app/services/alert.service';
 export class ProfileComponent implements OnInit {
 
 
-  tabName: string='';
   menuName: string='';
 
-  profile: Profile={
-    username: 'ccastillo', 
-    email: 'ccastillo@gmail.com',
-    password: 'ccastillo',
-    fullName: 'Cesar Castillo'
-  }
-  
-  estilo : any = {
-    display : 'none'
-  }
 
-  constructor(private alert:AlertService) { }
+
+  constructor(private alert:AlertService, private router: Router) { }
 
   ngOnInit(): void {
     setTimeout(()=>{
@@ -33,17 +24,11 @@ export class ProfileComponent implements OnInit {
     
   }
 
-  selectTab(identifier: string){
-    console.log(identifier);
-    this.tabName= identifier;
-    this.estilo.display= 'block'
-    setTimeout(()=>{
-      this.estilo.display = 'none'
-    }, 2000)
-  }
+ 
 
   selectMenu(identifier: string){
-    console.log(identifier);
+
+    this.router.navigateByUrl('profile/' + identifier.toLowerCase());
     this.menuName= identifier;
   }
 

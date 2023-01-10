@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProfileComponent } from './pages/profile/profile.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { LoginComponent } from './pages/login/login.component';
 import { Capitulo2Component } from './pages/capitulo2/capitulo2.component';
@@ -24,8 +23,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { CategorizarPipe } from './pipes/categorizar.pipe';
 import { CarritoComponent } from './pages/carrito/carrito.component';
 import { CarritoLineaComponent } from './components/carrito-linea/carrito-linea.component';
-import { InventarioComponent } from './pages/inventario/inventario.component';
-import { ProfileModule } from './profile/profile.module';
 import { MenusModule } from './menus/menus.module';
 import { ButtonsModule } from './buttons/buttons.module';
 
@@ -35,7 +32,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 @NgModule({
   declarations: [
     AppComponent,
-    ProfileComponent,
     ProductsComponent,
     LoginComponent,
     Capitulo2Component,
@@ -53,15 +49,13 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     Capitulo9Component,
     CategorizarPipe,
     CarritoComponent,
-    CarritoLineaComponent,
-    InventarioComponent
+    CarritoLineaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ProfileModule, 
     MenusModule,
     ButtonsModule,
     ModalModule.forRoot()
