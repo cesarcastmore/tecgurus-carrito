@@ -3,15 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MenuListComponent } from './components/menu-list/menu-list.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { LoginComponent } from './pages/login/login.component';
-import { MenuComponent } from './components/menu/menu.component';
-import { ProfileMenuComponent } from './components/profile-menu/profile-menu.component';
-import { ProfileTabsComponent } from './components/profile-tabs/profile-tabs.component';
-import { ProfileSettingComponent } from './components/profile-setting/profile-setting.component';
-import { ProfileSupportComponent } from './components/profile-support/profile-support.component';
 import { Capitulo2Component } from './pages/capitulo2/capitulo2.component';
 import { Capitulo2InputComponent } from './components/capitulo2-input/capitulo2-input.component';
 import { Capitulo2OutputComponent } from './components/capitulo2-output/capitulo2-output.component';
@@ -32,18 +26,16 @@ import { CarritoComponent } from './pages/carrito/carrito.component';
 import { CarritoLineaComponent } from './components/carrito-linea/carrito-linea.component';
 import { InventarioComponent } from './pages/inventario/inventario.component';
 
+import { ProfileModule } from './profile/profile.module';
+import { MenusModule } from './menus/menus.module';
+import { ButtonsModule } from './buttons/buttons.module';
+
 @NgModule({
   declarations: [
     AppComponent,
-    MenuListComponent,
     ProfileComponent,
     ProductsComponent,
     LoginComponent,
-    MenuComponent,
-    ProfileMenuComponent,
-    ProfileTabsComponent,
-    ProfileSettingComponent,
-    ProfileSupportComponent,
     Capitulo2Component,
     Capitulo2InputComponent,
     Capitulo2OutputComponent,
@@ -66,7 +58,11 @@ import { InventarioComponent } from './pages/inventario/inventario.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ProfileModule,
+    MenusModule,
+    ButtonsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

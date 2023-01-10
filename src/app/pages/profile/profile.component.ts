@@ -10,6 +10,9 @@ import { AlertService } from 'src/app/services/alert.service';
 export class ProfileComponent implements OnInit {
 
 
+  simpleButtonTitle: string='Cambiar Avatar';
+
+
   tabName: string='';
   menuName: string='';
 
@@ -47,6 +50,9 @@ export class ProfileComponent implements OnInit {
     this.menuName= identifier;
   }
 
+  changeAvatar(){
+    alert("Hola");
+  }
  
 
 }
