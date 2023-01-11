@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Profile } from 'src/app/models/profile';
 import { AlertService } from 'src/app/services/alert.service';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -27,7 +28,7 @@ export class ProfileComponent implements OnInit {
     display : 'none'
   }
 
-  constructor(private alert:AlertService) { }
+  constructor(private alert:AlertService, private router: Router) { }
 
   ngOnInit(): void {
     setTimeout(()=>{
@@ -47,6 +48,10 @@ export class ProfileComponent implements OnInit {
 
   selectMenu(identifier: string){
     console.log(identifier);
+
+    this.router.navigateByUrl('profile/' + identifier.toLowerCase());
+
+
     this.menuName= identifier;
   }
 
