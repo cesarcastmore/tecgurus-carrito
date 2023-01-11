@@ -1,7 +1,34 @@
 <div class="card">
-    <div class="card-body">
-      <h6 class="card-title font-weight-bold">Support</h6>
-      <p class="card-text">Get fast, free help from our friendly assistants.</p>
-      <button type="button" class="btn btn-primary">Contact Us</button>
-    </div>
+  <div class="card-body">
+    <h6 class="card-title font-weight-bold">Support</h6>
+    <p class="card-text">Get fast, free help from our friendly assistants.</p>
+    <ng-container [ngTemplateOutlet]="contact"></ng-container>
   </div>
+</div>
+
+
+
+<ng-template #template>
+  <app-modal>
+    <div header>
+      <h4 class="modal-title pull-left">Modal</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div body>
+      <app-render [plantilla]="contenido"></app-render>
+    </div>
+  </app-modal>
+
+</ng-template>
+
+<ng-template #contact> 
+  <button type="button" class="btn btn-primary" (click)="openModal(template)">Contact Us</button>
+</ng-template>
+
+
+
+<ng-template #contenido>
+  Contenido
+</ng-template>

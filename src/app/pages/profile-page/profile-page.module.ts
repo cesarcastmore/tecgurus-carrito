@@ -8,6 +8,7 @@ import { ButtonsModule } from 'src/app/buttons/buttons.module';
 import { OverviewComponent } from './pages/overview/overview.component';
 import { CrudComponent } from './pages/crud/crud.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { TemplatesModule } from 'src/app/templates/templates.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { SettingsComponent } from './pages/settings/settings.component';
     CommonModule,
     ProfilePageRoutingModule,
     ProfileModule,
-    ButtonsModule
+    ButtonsModule,
+    TemplatesModule
   ]
 })
 export class ProfilePageModule { }

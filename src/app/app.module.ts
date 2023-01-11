@@ -28,6 +28,7 @@ import { ButtonsModule } from './buttons/buttons.module';
 
 
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { TemplatesModule } from './templates/templates.module';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     HttpClientModule,
     MenusModule,
     ButtonsModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    TemplatesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

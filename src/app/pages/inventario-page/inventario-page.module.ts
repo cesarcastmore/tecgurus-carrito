@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { InventarioPageRoutingModule } from './inventario-page-routing.module';
 import { InventarioComponent } from './inventario.component';
+import { TemplatesModule } from 'src/app/templates/templates.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { InventarioComponent } from './inventario.component';
   ],
   imports: [
     CommonModule,
-    InventarioPageRoutingModule
+    InventarioPageRoutingModule,
+    TemplatesModule
   ]
 })
 export class InventarioPageModule { }

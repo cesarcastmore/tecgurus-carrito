@@ -1,54 +1,59 @@
-
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="category.html">Category</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Sub-category</li>
-                </ol>
-            </nav>
+            <app-breadcrumbs> 
+                <label categoria> Catalogo</label>
+                <label title> Productos</label>
+            </app-breadcrumbs>
         </div>
         <div class="col-6">
-            <input type = "text" (change)="find($event)">
+            <input type="text" (change)="find($event)">
         </div>
     </div>
 </div>
 <div class="container">
+
     <div class="row">
         <div class="col-12 col-sm-3">
             <div class="card bg-light mb-3">
-                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories</div>
+                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories
+                </div>
                 <ul class="list-group category_block">
-                    <li class="list-group-item" *ngFor="let categoria of categorias"><a href="javascript:void(0)" (click)="categorizar(categoria)">{{categoria.nombre}}</a></li>
-                   
+                    <li class="list-group-item" *ngFor="let categoria of categorias"><a href="javascript:void(0)"
+                            (click)="categorizar(categoria)">{{categoria.nombre}}</a></li>
+
                 </ul>
             </div>
-      
+
         </div>
         <div class="col">
             <div class="row">
-                <div class="col-12 col-md-6 col-lg-4" *ngFor="let product of (products | buscador: consulta) | categorizar: categorizarPor">
+                <div class="col-12 col-md-6 col-lg-4"
+                    *ngFor="let product of (products | buscador: consulta) | categorizar: categorizarPor">
                     <div class="card">
-                        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap" (click)="openModal(template)">
+                        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap"
+                            (click)="openModal(template)">
                         <div class="card-body">
-                            <h4 class="card-title"><a href="javascript:void()" [routerLink]="['/products',product.idproducto]" title="View Product">{{product.nombre}}</a></h4>
+                            <h4 class="card-title"><a href="javascript:void()"
+                                    [routerLink]="['/products',product.idproducto]"
+                                    title="View Product">{{product.nombre}}</a></h4>
                             <p class="card-text">{{product.descripcion}}</p>
                             <div class="row">
                                 <div class="col">
                                     <p class="btn btn-danger btn-block">{{product.precio | number : '0.2-2'}}</p>
                                 </div>
                                 <div class="col">
-                                    <a href="javascript:void(0)" class="btn btn-success btn-block" (click)="agregarCarrito(product)">Agregar</a>
+                                    <a href="javascript:void(0)" class="btn btn-success btn-block"
+                                        (click)="agregarCarrito(product)">Agregar</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div> 
-                
+                </div>
+
             </div>
         </div>
 
@@ -59,13 +64,16 @@
 
 
 <ng-template #template>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">Modal</h4>
-      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-        <span aria-hidden="true" class="visually-hidden">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      This is a modal.
-    </div>
-  </ng-template>
+    <app-modal>
+        <div>
+            <h4 class="modal-title pull-left">Modal</h4>
+            <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+                <span aria-hidden="true" class="visually-hidden">&times;</span>
+            </button>
+        </div>
+        <div>
+            This is a modal.
+        </div>
+    </app-modal>
+
+</ng-template>
