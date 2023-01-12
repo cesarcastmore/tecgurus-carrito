@@ -1,19 +1,44 @@
 <div class="card">
-    <div class="card-body">
-      <h6 class="card-title font-weight-bold">Support</h6>
-      <p class="card-text">Get fast, free help from our friendly assistants.</p>
-      <button type="button" class="btn btn-primary" (click)="openModal(template)">Contact Us</button>
-    </div>
-  </div>
+  <div class="card-body">
+    <h6 class="card-title font-weight-bold">Support</h6>
+    <p class="card-text">Get fast, free help from our friendly assistants.</p>
+    <ng-container [ngTemplateOutlet]="contactButton"></ng-container>
 
-  <ng-template #template>
-    <div class="modal-header">
+  </div>
+</div>
+
+<ng-template #template>
+  <app-modal>
+    <div header>
       <h4 class="modal-title pull-left">Modal</h4>
       <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
         <span aria-hidden="true" class="visually-hidden">&times;</span>
       </button>
     </div>
-    <div class="modal-body">
+    <div body>
       This is a modal.
     </div>
-  </ng-template>
+  </app-modal>
+
+</ng-template>
+
+<ng-template #contactButton>
+  <button type="button" class="btn btn-primary" (click)="openModal(template2)">Contact Us</button>
+</ng-template>
+
+
+<ng-template #template2>
+  <app-custom-modal [header]="encabezado" [body]="cuerpo"></app-custom-modal>
+</ng-template>
+
+<ng-template #encabezado>
+
+  <h4 class="modal-title pull-left">Modal</h4>
+  <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+    <span aria-hidden="true" class="visually-hidden">&times;</span>
+  </button>
+</ng-template>
+
+<ng-template #cuerpo>
+  This is the body
+</ng-template>

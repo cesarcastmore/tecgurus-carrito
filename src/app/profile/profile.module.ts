@@ -4,6 +4,7 @@ import { ProfileMenuComponent } from './profile-menu/profile-menu.component';
 import { ProfileTabsComponent } from './profile-tabs/profile-tabs.component';
 import { ProfileSettingComponent } from './profile-setting/profile-setting.component';
 import { ProfileSupportComponent } from './profile-support/profile-support.component';
+import { TemplatesModule } from '../templates/templates.module';
 
 
 
@@ -15,7 +16,8 @@ import { ProfileSupportComponent } from './profile-support/profile-support.compo
     ProfileSupportComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    TemplatesModule
   ], exports: [
     ProfileMenuComponent,
     ProfileTabsComponent,

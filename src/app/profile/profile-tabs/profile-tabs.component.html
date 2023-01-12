@@ -1,4 +1,14 @@
 <ul  class="nav nav-tabs">
     <li *ngFor="let tab of tabs" class="nav-item">
-      <a href="javascript:void(0)" class="active nav-link" (click)="pressTab(tab.value)">{{tab.tittle}}</a></li>
+      <a href="javascript:void(0)" class="active nav-link" (click)="pressTab(tab.value)">{{tab.tittle}}</a>
+    </li>
   </ul>
+  <div  [hidden]="currentTab === 'address' || currentTab === 'orders'">
+    <ng-container [ngTemplateOutlet]="settingTemplate"></ng-container>
+  </div>
+  <div  [hidden]="currentTab === 'settings' || currentTab === 'orders'">
+    <ng-container [ngTemplateOutlet]="addressTemplate"></ng-container>
+  </div>
+  <div  [hidden]="currentTab === 'address' || currentTab === 'settings'">
+    <ng-container [ngTemplateOutlet]="ordersTemplate"></ng-container>
+  </div>
