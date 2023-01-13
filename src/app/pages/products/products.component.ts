@@ -1,9 +1,10 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Categoria } from 'src/app/models/categoria';
 import { Product } from 'src/app/models/product';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { ProductosService } from 'src/app/services/productos.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { BreadcrumbsComponent } from 'src/app/templates/breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-products',
@@ -15,6 +16,10 @@ export class ProductsComponent implements OnInit {
   categorias: Categoria[]=[];
 
   categorizarPor: Categoria | null=null;
+
+  isShow: boolean= true;
+
+  @ViewChild(BreadcrumbsComponent) breadcrumbs: BreadcrumbsComponent | null= null;
 
   consulta: string = '';
   modalRef?: BsModalRef;
@@ -41,6 +46,8 @@ export class ProductsComponent implements OnInit {
 
   categorizar(categoria: Categoria){
     this.categorizarPor= categoria;
+    this.breadcrumbs?.setSubtitle(categoria.nombre);
+    this.isShow= false;
   }
 
 

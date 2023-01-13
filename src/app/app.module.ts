@@ -28,6 +28,8 @@ import { ProfileModule } from './profile/profile.module';
 import { MenusModule } from './menus/menus.module';
 import { ButtonsModule } from './buttons/buttons.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { TotalComponent } from './components/total/total.component';
+import { TemplatesModule } from './templates/templates.module';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     Capitulo9Component,
     CategorizarPipe,
     CarritoComponent,
-    CarritoLineaComponent
+    CarritoLineaComponent,
+    TotalComponent
     
   ],
   imports: [
@@ -60,7 +63,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ProfileModule,
     MenusModule,
     ButtonsModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    TemplatesModule
 
   ],
   providers: [],

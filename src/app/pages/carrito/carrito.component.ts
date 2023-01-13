@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { TotalComponent } from 'src/app/components/total/total.component';
 import { CarritoLinea } from 'src/app/models/carrito-linea';
 import { Cliente } from 'src/app/models/cliente';
 import { AlertService } from 'src/app/services/alert.service';
@@ -10,93 +11,128 @@ import { CarritoService } from 'src/app/services/carrito.service';
   templateUrl: './carrito.component.html',
   styleUrls: ['./carrito.component.css']
 })
-export class CarritoComponent implements OnInit {
+export class CarritoComponent implements OnInit, AfterViewInit {
 
-  carritoLineas: CarritoLinea[]=[];
-  clientes: Cliente[]=[];
+  carritoLineas: CarritoLinea[] = [];
+  clientes: Cliente[] = [];
 
-  total: number=0;
+  @ViewChild('inputDom') inputDom: ElementRef<HTMLInputElement> | null = null;
 
-  clienteForm: FormGroup=new FormGroup({
+
+
+  @ViewChild(TotalComponent) totalComponent: TotalComponent | null = null;
+
+
+  total: number = 0;
+
+  clienteForm: FormGroup = new FormGroup({
     idcliente: new FormControl()
   })
 
-  constructor(private carritoService: CarritoService, private notif: AlertService) { }
+  promoForm: FormGroup = new FormGroup({
+    code: new FormControl()
+  })
+
+  constructor(private carritoService: CarritoService,
+    private notif: AlertService, private render: Renderer2) { }
+
 
   ngOnInit(): void {
-    this.carritoLineas= this.carritoService.getCarritoLineas();
+    this.carritoLineas = this.carritoService.getCarritoLineas();
 
-    this.carritoLineas.forEach(item=> {
-      this.total= this.total + (item.cantidad*item.costo);
+    this.carritoLineas.forEach(item => {
+      this.total = this.total + (item.cantidad * item.costo);
     });
 
-    this.carritoService.getClientes().subscribe(clientes=> {
-      this.clientes= clientes;
+    this.carritoService.getClientes().subscribe(clientes => {
+      this.clientes = clientes;
     })
+
+    this.promoForm.valueChanges.subscribe(value => {
+      console.log(value);
+      if (value.code === 'TECGURUS') {
+        this.render.setStyle(this.inputDom?.nativeElement, 'background-color', 'yellow');
+      }
+    })
+
   }
 
 
-  public removeLinea(carritoLinea: CarritoLinea | null){
-    let index= this.carritoLineas.findIndex(item=> item.idcompraproducto=== carritoLinea?.idcompraproducto);
+  public removeLinea(carritoLinea: CarritoLinea | null) {
+    let index = this.carritoLineas.findIndex(item => item.idcompraproducto === carritoLinea?.idcompraproducto);
     this.carritoService.delete(index);
-    this.carritoLineas= this.carritoService.getCarritoLineas();
+    this.carritoLineas = this.carritoService.getCarritoLineas();
 
-    this.total=0;
-    this.carritoLineas.forEach(item=> {
-      this.total= this.total + (item.cantidad*item.costo);
+    this.total = 0;
+    this.carritoLineas.forEach(item => {
+      this.total = this.total + (item.cantidad * item.costo);
     })
-    
+
   }
 
-  public updateLinea(carritoLinea: CarritoLinea | null){
-    let index= this.carritoLineas.findIndex(item=> item.idcompraproducto=== carritoLinea?.idcompraproducto);
+  public updateLinea(carritoLinea: CarritoLinea | null) {
+    let index = this.carritoLineas.findIndex(item => item.idcompraproducto === carritoLinea?.idcompraproducto);
 
 
-    if(carritoLinea != null ){
+    if (carritoLinea != null) {
       this.carritoService.update(index, carritoLinea);
-      this.carritoLineas= this.carritoService.getCarritoLineas();
+      this.carritoLineas = this.carritoService.getCarritoLineas();
 
-      this.total=0;
-      this.carritoLineas.forEach(item=> {
-        this.total= this.total + (item.cantidad*item.costo);
+      this.total = 0;
+      this.carritoLineas.forEach(item => {
+        this.total = this.total + (item.cantidad * item.costo);
       })
     }
 
-    
+
   }
 
-  public completar(){
+  public completar() {
 
-    let cliente = this.clientes.find(cliente=>  cliente.idcliente=== Number(this.clienteForm.get('idcliente')?.value));
-    let fecha= new Date().toJSON().toString();
+    let cliente = this.clientes.find(cliente => cliente.idcliente === Number(this.clienteForm.get('idcliente')?.value));
+    let fecha = new Date().toJSON().toString();
 
-    this.carritoLineas= this.carritoLineas.map(linea=> {
+    this.carritoLineas = this.carritoLineas.map(linea => {
       delete linea.idcompraproducto;
       return linea;
     })
 
-    if(cliente){
+    if (cliente) {
       this.carritoService.completarCompra({
         cliente: cliente,
-        fecha: fecha, 
-        total: this.total, 
+        fecha: fecha,
+        total: this.total,
         compraproductos: this.carritoLineas,
         usuario: {
-          idusuario:1
+          idusuario: 1
         }
-      }).subscribe(value=> {
+      }).subscribe(value => {
         this.carritoService.clear();
-        this.carritoLineas=[];
-        this.total=0;
+        this.carritoLineas = [];
+        this.total = 0;
         this.clienteForm.reset();
         this.notif.notify('success', 'Se ha completado el pedido');
 
       })
-      
+
     }
 
- 
+  }
 
+  applyPromo() {
+
+    this.totalComponent?.promo();
+
+  }
+
+
+  //https://www.mattspaulding.org/The-Curious-Case-of-Angular-and-the-Infinite-Change-Event-Loop/
+  ngAfterViewInit(): void {
+
+    setTimeout(()=> {
+      this.totalComponent?.setTotal(this.total);
+
+    }, 500);
 
   }
 

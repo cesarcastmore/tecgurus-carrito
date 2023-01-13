@@ -2,15 +2,16 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 <div class="container">
+    <div [hidden]="isShow">
+        <app-breadcrumbs>
+            <label category>Catalogo</label>
+            <label title>Productos</label>
+        </app-breadcrumbs>
+    </div>
+
     <div class="row">
         <div class="col-6">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="category.html">Category</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Sub-category</li>
-                </ol>
-            </nav>
+           
         </div>
         <div class="col-6">
             <input type = "text" (change)="find($event)">
