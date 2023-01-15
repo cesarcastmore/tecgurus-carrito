@@ -20,6 +20,8 @@ export class ProductsComponent implements OnInit {
   modalRef?: BsModalRef;
 
 
+
+
   constructor(private productService: ProductosService, private carrito: CarritoService,
     private modalService: BsModalService) {
 
@@ -45,19 +47,11 @@ export class ProductsComponent implements OnInit {
   }
 
 
-  agregarCarrito(producto: Product){
-    this.carrito.add({
-      costo: producto.precio,
-      cantidad: 1,
-      producto: producto,
-      idcompraproducto: Math.random()
-
-    })
-
-  }
 
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
+
+   
 }

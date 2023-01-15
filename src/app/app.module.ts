@@ -29,6 +29,7 @@ import { ButtonsModule } from './buttons/buttons.module';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TemplatesModule } from './templates/templates.module';
+import { ProductComponent } from './components/product/product.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { TemplatesModule } from './templates/templates.module';
     Capitulo9Component,
     CategorizarPipe,
     CarritoComponent,
-    CarritoLineaComponent
+    CarritoLineaComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
