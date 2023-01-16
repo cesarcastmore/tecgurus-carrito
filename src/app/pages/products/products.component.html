@@ -9,8 +9,14 @@
                 <label title> Productos</label>
             </app-breadcrumbs>
         </div>
-        <div class="col-6">
-            <input type="text" (change)="find($event)">
+        
+        <div class="col-3">
+            <input type="text" (change)="find($event)" class="form-control">
+        </div>
+        <div class="col-3">
+            <button class="btn btn-primary" (click)="promo()"> Promocion</button>
+            <button class="btn btn-primary" (click)="aumentar()"> Aumentar</button>
+
         </div>
     </div>
 </div>
@@ -32,8 +38,8 @@
         <div class="col">
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-4"
-                    *ngFor="let product of (products | buscador: consulta) | categorizar: categorizarPor">
-                    <div class="card">
+                    *ngFor="let product of (products | buscador: consulta) | categorizar: categorizarPor" >
+                    <div class="card" #ispromotions>
                         <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap"
                             (click)="openModal(template)">
                         <app-product [product]="product"></app-product>

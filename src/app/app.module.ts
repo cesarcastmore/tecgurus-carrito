@@ -30,6 +30,7 @@ import { ButtonsModule } from './buttons/buttons.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TemplatesModule } from './templates/templates.module';
 import { ProductComponent } from './components/product/product.component';
+import { PluginsModule } from './plugins/plugins.module';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { ProductComponent } from './components/product/product.component';
     MenusModule,
     ButtonsModule,
     ModalModule.forRoot(),
-    TemplatesModule
+    TemplatesModule,
+    PluginsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

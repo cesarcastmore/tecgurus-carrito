@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { CarritoLineaComponent } from 'src/app/components/carrito-linea/carrito-linea.component';
 import { CarritoLinea } from 'src/app/models/carrito-linea';
 import { Cliente } from 'src/app/models/cliente';
 import { AlertService } from 'src/app/services/alert.service';
@@ -12,92 +13,106 @@ import { CarritoService } from 'src/app/services/carrito.service';
 })
 export class CarritoComponent implements OnInit {
 
-  carritoLineas: CarritoLinea[]=[];
-  clientes: Cliente[]=[];
+  carritoLineas: CarritoLinea[] = [];
+  clientes: Cliente[] = [];
 
-  total: number=0;
+  @ViewChildren(CarritoLineaComponent) lineasComponent: QueryList<CarritoLineaComponent> | null = null;
 
-  clienteForm: FormGroup=new FormGroup({
+  total: number = 0;
+
+  clienteForm: FormGroup = new FormGroup({
     idcliente: new FormControl()
   })
 
   constructor(private carritoService: CarritoService, private notif: AlertService) { }
 
   ngOnInit(): void {
-    this.carritoLineas= this.carritoService.getCarritoLineas();
+    this.carritoLineas = this.carritoService.getCarritoLineas();
 
-    this.carritoLineas.forEach(item=> {
-      this.total= this.total + (item.cantidad*item.costo);
+    this.carritoLineas.forEach(item => {
+      this.total = this.total + (item.cantidad * item.costo);
     });
 
-    this.carritoService.getClientes().subscribe(clientes=> {
-      this.clientes= clientes;
+    this.carritoService.getClientes().subscribe(clientes => {
+      this.clientes = clientes;
     })
   }
 
 
-  public removeLinea(carritoLinea: CarritoLinea | null){
-    let index= this.carritoLineas.findIndex(item=> item.idcompraproducto=== carritoLinea?.idcompraproducto);
+  public removeLinea(carritoLinea: CarritoLinea | null) {
+    let index = this.carritoLineas.findIndex(item => item.idcompraproducto === carritoLinea?.idcompraproducto);
     this.carritoService.delete(index);
-    this.carritoLineas= this.carritoService.getCarritoLineas();
+    this.carritoLineas = this.carritoService.getCarritoLineas();
 
-    this.total=0;
-    this.carritoLineas.forEach(item=> {
-      this.total= this.total + (item.cantidad*item.costo);
+    this.total = 0;
+    this.carritoLineas.forEach(item => {
+      this.total = this.total + (item.cantidad * item.costo);
     })
-    
+
   }
 
-  public updateLinea(carritoLinea: CarritoLinea | null){
-    let index= this.carritoLineas.findIndex(item=> item.idcompraproducto=== carritoLinea?.idcompraproducto);
+  public updateLinea(carritoLinea: CarritoLinea | null) {
+    let index = this.carritoLineas.findIndex(item => item.idcompraproducto === carritoLinea?.idcompraproducto);
 
 
-    if(carritoLinea != null ){
+    if (carritoLinea != null) {
       this.carritoService.update(index, carritoLinea);
-      this.carritoLineas= this.carritoService.getCarritoLineas();
+      this.carritoLineas = this.carritoService.getCarritoLineas();
 
-      this.total=0;
-      this.carritoLineas.forEach(item=> {
-        this.total= this.total + (item.cantidad*item.costo);
+      this.total = 0;
+      this.carritoLineas.forEach(item => {
+        this.total = this.total + (item.cantidad * item.costo);
       })
     }
 
-    
+
   }
 
-  public completar(){
+  public completar() {
 
-    let cliente = this.clientes.find(cliente=>  cliente.idcliente=== Number(this.clienteForm.get('idcliente')?.value));
-    let fecha= new Date().toJSON().toString();
+    let cliente = this.clientes.find(cliente => cliente.idcliente === Number(this.clienteForm.get('idcliente')?.value));
+    let fecha = new Date().toJSON().toString();
 
-    this.carritoLineas= this.carritoLineas.map(linea=> {
+    this.carritoLineas = this.carritoLineas.map(linea => {
       delete linea.idcompraproducto;
       return linea;
     })
 
-    if(cliente){
+    if (cliente) {
       this.carritoService.completarCompra({
         cliente: cliente,
-        fecha: fecha, 
-        total: this.total, 
+        fecha: fecha,
+        total: this.total,
         compraproductos: this.carritoLineas,
         usuario: {
-          idusuario:1
+          idusuario: 1
         }
-      }).subscribe(value=> {
+      }).subscribe(value => {
         this.carritoService.clear();
-        this.carritoLineas=[];
-        this.total=0;
+        this.carritoLineas = [];
+        this.total = 0;
         this.clienteForm.reset();
         this.notif.notify('success', 'Se ha completado el pedido');
 
       })
-      
+
     }
 
- 
 
 
   }
+
+
+
+  promo() {
+
+
+    console.log("promocion", this.lineasComponent)
+    this.lineasComponent?.forEach((lin:CarritoLineaComponent)=> {
+      lin.color='yellow';
+    })
+
+  }
+
 
 }

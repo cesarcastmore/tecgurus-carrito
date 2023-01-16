@@ -12,7 +12,9 @@ export class CarritoLineaComponent implements OnInit {
   formCarritoLinea: FormGroup= new FormGroup({
     cantidad: new FormControl()
     
-  })
+  });
+
+  color:string='';
 
   @Input() carritoLinea: CarritoLinea | null= null;
 
