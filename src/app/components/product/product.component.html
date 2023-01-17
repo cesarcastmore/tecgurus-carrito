@@ -1,0 +1,13 @@
+
+<div class="card-body">
+    <h4 class="card-title"><a href="javascript:void()" [routerLink]="['/products',product?.idproducto]" title="View Product">{{product?.nombre}}</a></h4>
+    <p class="card-text">{{product?.descripcion}}</p>
+    <div class="row">
+        <div class="col">
+            <p class="btn btn-danger btn-block">{{product?.precio | number : '0.2-2'}}</p>
+        </div>
+        <div class="col">
+            <a href="javascript:void(0)" class="btn btn-success btn-block" (click)="agregarCarrito(product)">Agregar</a>
+        </div>
+    </div>
+</div>

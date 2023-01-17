@@ -9,6 +9,8 @@ import { CarritoLinea } from 'src/app/models/carrito-linea';
 })
 export class CarritoLineaComponent implements OnInit {
 
+  public color: string='';
+
   formCarritoLinea: FormGroup= new FormGroup({
     cantidad: new FormControl()
     

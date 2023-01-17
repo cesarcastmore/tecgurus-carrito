@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { CarritoLineaComponent } from 'src/app/components/carrito-linea/carrito-linea.component';
 import { TotalComponent } from 'src/app/components/total/total.component';
 import { CarritoLinea } from 'src/app/models/carrito-linea';
 import { Cliente } from 'src/app/models/cliente';
@@ -21,6 +22,8 @@ export class CarritoComponent implements OnInit, AfterViewInit {
 
 
   @ViewChild(TotalComponent) totalComponent: TotalComponent | null = null;
+
+  @ViewChildren(CarritoLineaComponent) lineasComponent: QueryList<CarritoLineaComponent> | null= null;
 
 
   total: number = 0;
@@ -122,6 +125,20 @@ export class CarritoComponent implements OnInit, AfterViewInit {
   applyPromo() {
 
     this.totalComponent?.promo();
+
+  }
+
+  applyMeses(){
+
+    for(let i=0; i< this.carritoLineas.length; i++){
+      if(this.carritoLineas[i].costo > 5000){
+        let lineaComp: CarritoLineaComponent | undefined = this.lineasComponent?.get(i) ;
+        lineaComp!.color='yellow';
+
+
+      }
+    }
+
 
   }
 
