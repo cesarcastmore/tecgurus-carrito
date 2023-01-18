@@ -16,7 +16,7 @@
             <button class="btn btn-primary" (click)="aumentarPrecio()">Aumentar Precios</button>
         </div>
         <div class="col-6">
-            <input type="text" (change)="find($event)" class="form-control">
+            <input type="text" (change)="find($event)" class="form-control" appError [isError]="true">
         </div>
     </div>
 </div>

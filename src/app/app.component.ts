@@ -18,13 +18,13 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    setTimeout(()=> {
+    /*setTimeout(()=> {
       if(this.template){
         this.modalRef = this.modalService.show(this.template);
 
       }
 
-    }, 2000);
+    }, 2000);*/
     
   }
  

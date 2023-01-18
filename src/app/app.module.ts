@@ -35,6 +35,9 @@ import { PluginsModule } from './plugins/plugins.module';
 import { ProductDescriptionComponent } from './components/product-description/product-description.component';
 import { ProductQuestionsComponent } from './components/product-questions/product-questions.component';
 import { ProductCommentsComponent } from './components/product-comments/product-comments.component';
+import { DragDirective } from './directives/drag.directive';
+import { DropDirective } from './directives/drop.directive';
+import { ErrorDirective } from './directives/error.directive';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,10 @@ import { ProductCommentsComponent } from './components/product-comments/product-
     ProductComponent,
     ProductDescriptionComponent,
     ProductQuestionsComponent,
-    ProductCommentsComponent
+    ProductCommentsComponent,
+    DragDirective,
+    DropDirective,
+    ErrorDirective
     
   ],
   imports: [

@@ -9,5 +9,8 @@
         <div class="col">
             <a href="javascript:void(0)" class="btn btn-success btn-block" (click)="agregarCarrito(product)">Agregar</a>
         </div>
+        <div class="col">
+            <button class="btn btn-primary"  draggable="true"  appDrag [product]="product">Arrastrar</button>
+        </div>
     </div>
 </div>
