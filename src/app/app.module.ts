@@ -31,6 +31,11 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { TemplatesModule } from './templates/templates.module';
 import { ProductComponent } from './components/product/product.component';
 import { PluginsModule } from './plugins/plugins.module';
+import { ProductCommentsComponent } from './components/product-comments/product-comments.component';
+import { ProductQuestionsComponent } from './components/product-questions/product-questions.component';
+import { ProductDescriptionComponent } from './components/product-description/product-description.component';
+import { DragDirective } from './directives/drag.directive';
+import { DropDirective } from './directives/drop.directive';
 
 @NgModule({
   declarations: [
@@ -53,7 +58,12 @@ import { PluginsModule } from './plugins/plugins.module';
     CategorizarPipe,
     CarritoComponent,
     CarritoLineaComponent,
-    ProductComponent
+    ProductComponent,
+    ProductCommentsComponent,
+    ProductQuestionsComponent,
+    ProductDescriptionComponent,
+    DragDirective,
+    DropDirective
   ],
   imports: [
     BrowserModule,
