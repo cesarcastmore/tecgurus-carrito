@@ -21,7 +21,7 @@ export class ProductosService {
     return this.http.get<Product[]>("https://curso.tgconsulting.online/minipos/api/producto", {headers})
    }
 
-   public getCategorias():Observable<Categoria[]>{
+   public getCategorias():Observable<Categoria[]> | null{
 
     let headers: HttpHeaders= new HttpHeaders().append('Authorization', 'Bearer '+ this.auth.jwt);
     return this.http.get<Categoria[]>("https://curso.tgconsulting.online/minipos/api/categoria", {headers})

@@ -27,18 +27,19 @@
             <div class="card bg-light mb-3">
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories
                 </div>
-                <ul class="list-group category_block">
+                <ul class="list-group category_block" *ngIf="(categorias$ | async) as categorias; loading">
                     <li class="list-group-item" *ngFor="let categoria of categorias"><a href="javascript:void(0)"
                             (click)="categorizar(categoria)">{{categoria.nombre}}</a></li>
 
                 </ul>
+                <div #loading>Cargando...</div>
             </div>
 
         </div>
         <div class="col">
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-4"
-                    *ngFor="let product of (products | buscador: consulta) | categorizar: categorizarPor" >
+                    *ngFor="let product of (products | buscador: consulta)" >
                     <div class="card" #ispromotions>
                         <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap"
                             (click)="openModal(template)">

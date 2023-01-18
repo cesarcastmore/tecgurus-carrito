@@ -5,6 +5,8 @@ import { CarritoService } from 'src/app/services/carrito.service';
 import { ProductosService } from 'src/app/services/productos.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ProductComponent } from 'src/app/components/product/product.component';
+import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -13,7 +15,7 @@ import { ProductComponent } from 'src/app/components/product/product.component';
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
-  categorias: Categoria[]=[];
+  categorias$: Observable<Categoria[]> | null = null;
 
   categorizarPor: Categoria | null=null;
 
@@ -27,19 +29,30 @@ export class ProductsComponent implements OnInit {
 
 
   constructor(private productService: ProductosService, private carrito: CarritoService,
-    private modalService: BsModalService, private render: Renderer2) {
+    private modalService: BsModalService, private render: Renderer2,
+    private activedRouter: ActivatedRoute, private router: Router) {
 
    }
 
   ngOnInit(): void {
 
-    this.productService.getProductos().subscribe((products: Product[])=>{
-      this.products= products;
-    });
 
-    this.productService.getCategorias().subscribe((categorias: Categoria[])=>{
-      this.categorias= categorias;
+
+    this.categorias$ = this.productService.getCategorias();
+
+    this.activedRouter.queryParams.subscribe((query_params: any)=> {
+
+      this.productService.getProductos().subscribe((products: Product[])=>{
+        this.products= products.filter((pd: Product)=> {
+          return pd.categoria.idcategoria === Number(query_params.category_id);
+
+        })
+      });
+
+    
     })
+
+
 
   }
   find(event : any) {
@@ -47,7 +60,14 @@ export class ProductsComponent implements OnInit {
   }
 
   categorizar(categoria: Categoria){
-    this.categorizarPor= categoria;
+    //this.categorizarPor= categoria;
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.activedRouter,
+        queryParams: {category_id: categoria.idcategoria},
+        queryParamsHandling: "merge", // remove to replace all query params by provided
+      });
   }
 
 
