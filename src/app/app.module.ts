@@ -32,6 +32,9 @@ import { TotalComponent } from './components/total/total.component';
 import { TemplatesModule } from './templates/templates.module';
 import { ProductComponent } from './components/product/product.component';
 import { PluginsModule } from './plugins/plugins.module';
+import { ProductDescriptionComponent } from './components/product-description/product-description.component';
+import { ProductQuestionsComponent } from './components/product-questions/product-questions.component';
+import { ProductCommentsComponent } from './components/product-comments/product-comments.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,10 @@ import { PluginsModule } from './plugins/plugins.module';
     CarritoComponent,
     CarritoLineaComponent,
     TotalComponent,
-    ProductComponent
+    ProductComponent,
+    ProductDescriptionComponent,
+    ProductQuestionsComponent,
+    ProductCommentsComponent
     
   ],
   imports: [
