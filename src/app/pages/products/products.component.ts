@@ -5,8 +5,9 @@ import { CarritoService } from 'src/app/services/carrito.service';
 import { ProductosService } from 'src/app/services/productos.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ProductComponent } from 'src/app/components/product/product.component';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
@@ -18,6 +19,12 @@ export class ProductsComponent implements OnInit {
   categorias$: Observable<Categoria[]> | null = null;
 
   categorizarPor: Categoria | null=null;
+
+  searchForm: FormGroup= new FormGroup({
+    search: new FormControl()
+  })
+
+  searcher$: Observable<string> | undefined; 
 
   consulta: string = '';
   modalRef?: BsModalRef;
@@ -36,7 +43,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+    this.searcher$ = this.searchForm.get("search")?.valueChanges;
 
     this.categorias$ = this.productService.getCategorias();
 

@@ -10,8 +10,8 @@
             </app-breadcrumbs>
         </div>
         
-        <div class="col-3">
-            <input type="text" (change)="find($event)" class="form-control">
+        <div class="col-3" [formGroup]="searchForm">
+            <input type="text" (change)="find($event)" class="form-control" formControlName="search">
         </div>
         <div class="col-3">
             <button class="btn btn-primary" (click)="promo()"> Promocion</button>
@@ -39,7 +39,7 @@
         <div class="col">
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-4"
-                    *ngFor="let product of (products | buscador: consulta)" >
+                    *ngFor="let product of (products | buscador: (searcher$ | async))" >
                     <div class="card" #ispromotions>
                         <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap"
                             (click)="openModal(template)">

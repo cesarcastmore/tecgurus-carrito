@@ -13,6 +13,7 @@ import { Capitulo7Component } from './pages/capitulo7/capitulo7.component';
 import { Capitulo8Component } from './pages/capitulo8/capitulo8.component';
 import { Capitulo9Component } from './pages/capitulo9/capitulo9.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
+import { RecoverPasswordComponent } from './pages/recover-password/recover-password.component';
 
 const routes: Routes = [{
   path: '', component: TecgurusComponent,
@@ -52,6 +53,8 @@ const routes: Routes = [{
 ]
 }, {
   path: 'login', component: LoginComponent
+},{
+  path: 'recover_password', component: RecoverPasswordComponent
 }
 ];
 

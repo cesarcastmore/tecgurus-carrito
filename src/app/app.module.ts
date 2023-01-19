@@ -36,6 +36,7 @@ import { ProductQuestionsComponent } from './components/product-questions/produc
 import { ProductDescriptionComponent } from './components/product-description/product-description.component';
 import { DragDirective } from './directives/drag.directive';
 import { DropDirective } from './directives/drop.directive';
+import { RecoverPasswordComponent } from './pages/recover-password/recover-password.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { DropDirective } from './directives/drop.directive';
     ProductQuestionsComponent,
     ProductDescriptionComponent,
     DragDirective,
-    DropDirective
+    DropDirective,
+    RecoverPasswordComponent
   ],
   imports: [
     BrowserModule,
