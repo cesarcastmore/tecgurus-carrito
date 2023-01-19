@@ -26,11 +26,12 @@
             <div class="card bg-light mb-3">
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories
                 </div>
-                <ul class="list-group category_block">
+                <ul class="list-group category_block" *ngIf="(categorias$ | async) as categorias; loading">
                     <li class="list-group-item" *ngFor="let categoria of categorias"><a href="javascript:void(0)"
                             (click)="categorizar(categoria)">{{categoria.nombre}}</a></li>
 
                 </ul>
+                <div #loading>Cargando ...</div>
             </div>
 
         </div>

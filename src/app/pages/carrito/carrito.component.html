@@ -39,7 +39,7 @@
                                 <div class="needs-validation" [formGroup]="clienteForm">
                                     <div class="form-group">
                                         <select class="form-control custom-select" formControlName="idcliente">
-                                            <option *ngFor="let cliente of clientes" [ngValue]="cliente.idcliente">
+                                            <option *ngFor="let cliente of (clientes$ | async)" [ngValue]="cliente.idcliente">
                                                 {{cliente.nombre}}</option>
                                         </select>
                                         <div class="invalid-feedback">Please choose your country!</div>

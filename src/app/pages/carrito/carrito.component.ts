@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { CarritoLineaComponent } from 'src/app/components/carrito-linea/carrito-linea.component';
 import { TotalComponent } from 'src/app/components/total/total.component';
 import { CarritoLinea } from 'src/app/models/carrito-linea';
@@ -15,7 +16,7 @@ import { CarritoService } from 'src/app/services/carrito.service';
 export class CarritoComponent implements OnInit, AfterViewInit {
 
   carritoLineas: CarritoLinea[] = [];
-  clientes: Cliente[] = [];
+  clientes$: Observable<Cliente[]> | null = null;
 
   @ViewChild('inputDom') inputDom: ElementRef<HTMLInputElement> | null = null;
 
@@ -47,9 +48,7 @@ export class CarritoComponent implements OnInit, AfterViewInit {
       this.total = this.total + (item.cantidad * item.costo);
     });
 
-    this.carritoService.getClientes().subscribe(clientes => {
-      this.clientes = clientes;
-    })
+    this.clientes$= this.carritoService.getClientes();
 
     this.promoForm.valueChanges.subscribe(value => {
       console.log(value);
@@ -92,7 +91,7 @@ export class CarritoComponent implements OnInit, AfterViewInit {
 
   public completar() {
 
-    let cliente = this.clientes.find(cliente => cliente.idcliente === Number(this.clienteForm.get('idcliente')?.value));
+   /*let cliente = this.clientes.find(cliente => cliente.idcliente === Number(this.clienteForm.get('idcliente')?.value));
     let fecha = new Date().toJSON().toString();
 
     this.carritoLineas = this.carritoLineas.map(linea => {
@@ -118,7 +117,7 @@ export class CarritoComponent implements OnInit, AfterViewInit {
 
       })
 
-    }
+    }*/
 
   }
 

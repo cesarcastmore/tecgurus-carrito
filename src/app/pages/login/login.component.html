@@ -22,7 +22,8 @@
             <div class="or">OR</div>
         </div>
         <div class="loginbox-textbox">
-            <input type="text" class="form-control" placeholder="Email" formControlName="username">
+            <input type="text" class="form-control" placeholder="Email" formControlName="username"
+            [ngClass]="{'error': (status$ | async) === 'INVALID'}" >
             <label *ngIf="loginForm.get('username')?.hasError('required')">El usuario es Obligatorio</label>
             <label *ngIf="loginForm.get('username')?.hasError('email')">El usuario debe ser un correo</label>
         </div>

@@ -1,0 +1,11 @@
+{{ (observable$ | async) }}
+
+<div *ngIf="(productos$ | async) as productos; loading">
+
+    <p *ngFor="let producto of productos">
+        {{producto.nombre}}
+    </p>
+</div>
+<div #loading>
+    Cargando...
+</div>

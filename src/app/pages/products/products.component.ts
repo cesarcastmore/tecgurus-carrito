@@ -6,6 +6,8 @@ import { ProductosService } from 'src/app/services/productos.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { BreadcrumbsComponent } from 'src/app/templates/breadcrumbs/breadcrumbs.component';
 import { ProductComponent } from 'src/app/components/product/product.component';
+import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -14,7 +16,7 @@ import { ProductComponent } from 'src/app/components/product/product.component';
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
-  categorias: Categoria[]=[];
+  categorias$: Observable<Categoria[]> | null= null;
 
   categorizarPor: Categoria | null=null;
 
@@ -30,7 +32,8 @@ export class ProductsComponent implements OnInit {
   modalRef?: BsModalRef;
 
   constructor(private productService: ProductosService, private carrito: CarritoService,
-    private modalService: BsModalService, private render: Renderer2) {
+    private modalService: BsModalService, private render: Renderer2,
+    private router: Router, private activatedRoute: ActivatedRoute) {
 
    }
 
@@ -40,8 +43,10 @@ export class ProductsComponent implements OnInit {
       this.products= products;
     });
 
-    this.productService.getCategorias().subscribe((categorias: Categoria[])=>{
-      this.categorias= categorias;
+    this.categorias$ = this.productService.getCategorias();
+
+    this.activatedRoute.queryParams.subscribe(value=>{
+      console.log(value);
     })
 
   }
@@ -53,6 +58,16 @@ export class ProductsComponent implements OnInit {
     this.categorizarPor= categoria;
     this.breadcrumbs?.setSubtitle(categoria.nombre);
     this.isShow= false;
+
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.activatedRoute,
+        queryParams: {category_id: categoria.idcategoria},
+        queryParamsHandling: "merge", // remove to replace all query params by provided
+      })
+
+
   }
 
 

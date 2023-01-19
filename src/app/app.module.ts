@@ -38,6 +38,7 @@ import { ProductCommentsComponent } from './components/product-comments/product-
 import { DragDirective } from './directives/drag.directive';
 import { DropDirective } from './directives/drop.directive';
 import { ErrorDirective } from './directives/error.directive';
+import { Capitulo13Component } from './pages/capitulo13/capitulo13.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { ErrorDirective } from './directives/error.directive';
     ProductCommentsComponent,
     DragDirective,
     DropDirective,
-    ErrorDirective
+    ErrorDirective,
+    Capitulo13Component
     
   ],
   imports: [
