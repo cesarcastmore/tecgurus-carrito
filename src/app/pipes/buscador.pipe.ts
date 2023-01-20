@@ -5,7 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class BuscadorPipe implements PipeTransform {
 
-  transform(value: any[], texto: string): any[] {
+  transform(value: any[], texto: string | null): any[] {
+
+    if(texto === null){
+      return value;
+    }
     
     let arreglo: any[] = [];
     value.forEach(item => {

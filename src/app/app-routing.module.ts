@@ -14,6 +14,7 @@ import { Capitulo8Component } from './pages/capitulo8/capitulo8.component';
 import { Capitulo9Component } from './pages/capitulo9/capitulo9.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
 import { Capitulo13Component } from './pages/capitulo13/capitulo13.component';
+import { BuscadorComponent } from './pages/buscador/buscador.component';
 
 const routes: Routes = [{
   path: '', component: TecgurusComponent,
@@ -53,6 +54,9 @@ const routes: Routes = [{
 
   }, {
     path: 'capitulo13', component: Capitulo13Component
+
+  },{
+    path: 'buscador', component: BuscadorComponent
 
   }]
 }, {

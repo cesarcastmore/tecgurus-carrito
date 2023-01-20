@@ -15,8 +15,8 @@
             <button class="btn btn-primary" (click)="aplicarPromo()">Aplicar Promo</button>
             <button class="btn btn-primary" (click)="aumentarPrecio()">Aumentar Precios</button>
         </div>
-        <div class="col-6">
-            <input type="text" (change)="find($event)" class="form-control" appError [isError]="true">
+        <div class="col-6" [formGroup]="searchForm">
+            <input type="text" (change)="find($event)" class="form-control" appError [isError]="true" formControlName="query">
         </div>
     </div>
 </div>
@@ -38,7 +38,7 @@
         <div class="col">
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-4"
-                    *ngFor="let product of (products | buscador: consulta) | categorizar: categorizarPor">
+                    *ngFor="let product of (products | buscador: ( query$ | async))">
                     <div class="card" #cardDiv>
                         <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap"
                             (click)="openModal(template)">

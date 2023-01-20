@@ -1,0 +1,18 @@
+<div class="row" [formGroup]="searchForm">
+    <input type="text" class="form-control"  formControlName="texto">
+</div>
+<table class="table">
+    <tbody>
+        <tr>
+            <td>Nombre</td>
+            <td>Categoria</td>
+            <td>SKU</td>
+        </tr>
+
+        <tr *ngFor="let producto of productos">
+            <td>{{producto.nombre}}</td>
+            <td>{{producto.categoria.nombre}}</td>
+            <td>{{producto.sku}}</td>
+        </tr>
+    </tbody>
+</table>
