@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormControl, FormControlStatus, FormGroup, Validator, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { fromEvent, Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,20 +9,23 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
 
-  status: string='';
-  
+  status: string = '';
 
-  status$: Observable<string>| undefined;
+  @ViewChild("inputLogin") inputLogin: ElementRef | null = null;
 
-  subscriptionStatus: Subscription| undefined;
+
+  status$: Observable<string> | undefined;
+
+  subscriptionStatus: Subscription | undefined;
 
   loginForm: FormGroup = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
   });
   constructor(private router: Router, private auth: AuthService) { }
+
 
   ngOnInit(): void {
 
@@ -31,9 +34,12 @@ export class LoginComponent implements OnInit {
     })*/
 
     this.status$ = this.loginForm.get('username')?.statusChanges;
+
+
+
   }
 
-  async login() {
+  async login(): Promise<any> {
 
     let result = await this.auth.login(this.loginForm.value.username, this.loginForm.value.password).toPromise();
 
@@ -48,6 +54,16 @@ export class LoginComponent implements OnInit {
     }
 
 
+  }
+
+  ngAfterViewInit(): void {
+    fromEvent(this.inputLogin?.nativeElement, 'click').subscribe(() => {
+      console.log("Evento");
+      this.login().then(() => {
+
+      });
+    }
+    );
   }
 
 }

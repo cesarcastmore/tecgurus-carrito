@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, map, Observable, takeUntil } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, Observable, takeUntil, mergeMap, concatMap, switchMap, tap } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -12,13 +12,15 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class BuscadorComponent implements OnInit {
 
-  private url: string='https://curso.tgconsulting.online/minipos/api/producto/busqueda/';
+  private url: string = 'https://curso.tgconsulting.online/minipos/api/producto/busqueda/';
 
-  searchForm: FormGroup= new FormGroup({
+  searchForm: FormGroup = new FormGroup({
     texto: new FormControl()
   })
 
-  productos: Product[]=[];
+  productos: Product[] = [];
+
+  productos$: Observable<Product[]> | null = null;
 
   constructor(private http: HttpClient,
     private auth: AuthService) { }
@@ -35,6 +37,7 @@ export class BuscadorComponent implements OnInit {
 
       //outerValue
     textForm$.subscribe(query=>{
+
       let producto$: Observable<Product[]> =this.getProductos(query);
       producto$.subscribe(productos=> {
         //innerValue
@@ -42,9 +45,28 @@ export class BuscadorComponent implements OnInit {
       })
     })
 
+    /*let searchForm$: Observable<any> = this.searchForm.valueChanges;
+
+    let textForm$: Observable<string> = searchForm$.pipe(
+      map(form => form.texto),
+      debounceTime(500),
+      distinctUntilChanged()
+    );
+
+    this.productos$ = textForm$.pipe(
+      switchMap((text: string) => {
 
 
-    
+        console.log(text);
+        return this.getProductos(text)
+          .pipe(tap(() => console.log("entro")));
+      })
+
+
+    )*/
+
+
+
 
 
 
@@ -52,10 +74,10 @@ export class BuscadorComponent implements OnInit {
   }
 
 
-  public getProductos(query: string):Observable<Product[]>{
+  public getProductos(query: string): Observable<Product[]> {
 
-    let headers: HttpHeaders= new HttpHeaders().append('Authorization','Bearer '+ this.auth.jwt);
-    return this.http.get<Product[]>(this.url + query, {headers})
-   }
+    let headers: HttpHeaders = new HttpHeaders().append('Authorization', 'Bearer ' + this.auth.jwt);
+    return this.http.get<Product[]>(this.url + query, { headers })
+  }
 
 }

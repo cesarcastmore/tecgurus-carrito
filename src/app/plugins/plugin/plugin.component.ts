@@ -24,9 +24,9 @@ export class PluginComponent implements OnInit {
     let componentPlugin2= this.factory.resolveComponentFactory(PluginExample2Component);
     let component2 = this.plugin?.createComponent(componentPlugin2);
 
-    setTimeout(()=> {
+    /*setTimeout(()=> {
       this.plugin?.clear();
-    }, 5000);
+    }, 5000);*/
 
   }
 

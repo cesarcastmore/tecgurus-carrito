@@ -9,7 +9,7 @@
             <td>SKU</td>
         </tr>
 
-        <tr *ngFor="let producto of productos">
+        <tr *ngFor="let producto of (productos$ | async)">
             <td>{{producto.nombre}}</td>
             <td>{{producto.categoria.nombre}}</td>
             <td>{{producto.sku}}</td>

@@ -7,6 +7,7 @@ import { CarritoLinea } from 'src/app/models/carrito-linea';
 import { Cliente } from 'src/app/models/cliente';
 import { AlertService } from 'src/app/services/alert.service';
 import { CarritoService } from 'src/app/services/carrito.service';
+import { PluginsService } from 'src/app/services/plugins.service';
 
 @Component({
   selector: 'app-carrito',
@@ -24,7 +25,9 @@ export class CarritoComponent implements OnInit, AfterViewInit {
 
   @ViewChild(TotalComponent) totalComponent: TotalComponent | null = null;
 
-  @ViewChildren(CarritoLineaComponent) lineasComponent: QueryList<CarritoLineaComponent> | null= null;
+  @ViewChildren(CarritoLineaComponent) lineasComponent: QueryList<CarritoLineaComponent> | null = null;
+
+  active_to_remove: CarritoLinea | null= null;
 
 
   total: number = 0;
@@ -38,7 +41,8 @@ export class CarritoComponent implements OnInit, AfterViewInit {
   })
 
   constructor(private carritoService: CarritoService,
-    private notif: AlertService, private render: Renderer2) { }
+    private notif: AlertService, private render: Renderer2,
+    private pluginService: PluginsService) { }
 
 
   ngOnInit(): void {
@@ -48,7 +52,7 @@ export class CarritoComponent implements OnInit, AfterViewInit {
       this.total = this.total + (item.cantidad * item.costo);
     });
 
-    this.clientes$= this.carritoService.getClientes();
+    this.clientes$ = this.carritoService.getClientes();
 
     this.promoForm.valueChanges.subscribe(value => {
       console.log(value);
@@ -56,6 +60,35 @@ export class CarritoComponent implements OnInit, AfterViewInit {
         this.render.setStyle(this.inputDom?.nativeElement, 'background-color', 'yellow');
       }
     })
+
+
+
+    this.pluginService.close$.subscribe(() => {
+      this.removeLinea(this.active_to_remove);
+
+    })
+
+  }
+
+
+  public confirmToRemove(carritoLinea: CarritoLinea | null) {
+
+    this.pluginService.openPlugin();
+
+    this.active_to_remove=carritoLinea;
+
+
+
+    /*
+    let index = this.carritoLineas.findIndex(item => item.idcompraproducto === carritoLinea?.idcompraproducto);
+    this.carritoService.delete(index);
+    this.carritoLineas = this.carritoService.getCarritoLineas();
+
+    this.total = 0;
+    this.carritoLineas.forEach(item => {
+      this.total = this.total + (item.cantidad * item.costo);
+    })
+  */
 
   }
 
@@ -68,15 +101,15 @@ export class CarritoComponent implements OnInit, AfterViewInit {
     this.total = 0;
     this.carritoLineas.forEach(item => {
       this.total = this.total + (item.cantidad * item.costo);
-    })
+    });
 
   }
 
   public updateLinea(carritoLinea: CarritoLinea | null) {
-    let index = this.carritoLineas.findIndex(item => item.idcompraproducto === carritoLinea?.idcompraproducto);
+      let index = this.carritoLineas.findIndex(item => item.idcompraproducto === carritoLinea?.idcompraproducto);
 
 
-    if (carritoLinea != null) {
+      if(carritoLinea != null) {
       this.carritoService.update(index, carritoLinea);
       this.carritoLineas = this.carritoService.getCarritoLineas();
 
@@ -91,33 +124,33 @@ export class CarritoComponent implements OnInit, AfterViewInit {
 
   public completar() {
 
-   /*let cliente = this.clientes.find(cliente => cliente.idcliente === Number(this.clienteForm.get('idcliente')?.value));
-    let fecha = new Date().toJSON().toString();
-
-    this.carritoLineas = this.carritoLineas.map(linea => {
-      delete linea.idcompraproducto;
-      return linea;
-    })
-
-    if (cliente) {
-      this.carritoService.completarCompra({
-        cliente: cliente,
-        fecha: fecha,
-        total: this.total,
-        compraproductos: this.carritoLineas,
-        usuario: {
-          idusuario: 1
-        }
-      }).subscribe(value => {
-        this.carritoService.clear();
-        this.carritoLineas = [];
-        this.total = 0;
-        this.clienteForm.reset();
-        this.notif.notify('success', 'Se ha completado el pedido');
-
-      })
-
-    }*/
+    /*let cliente = this.clientes.find(cliente => cliente.idcliente === Number(this.clienteForm.get('idcliente')?.value));
+     let fecha = new Date().toJSON().toString();
+ 
+     this.carritoLineas = this.carritoLineas.map(linea => {
+       delete linea.idcompraproducto;
+       return linea;
+     })
+ 
+     if (cliente) {
+       this.carritoService.completarCompra({
+         cliente: cliente,
+         fecha: fecha,
+         total: this.total,
+         compraproductos: this.carritoLineas,
+         usuario: {
+           idusuario: 1
+         }
+       }).subscribe(value => {
+         this.carritoService.clear();
+         this.carritoLineas = [];
+         this.total = 0;
+         this.clienteForm.reset();
+         this.notif.notify('success', 'Se ha completado el pedido');
+ 
+       })
+ 
+     }*/
 
   }
 
@@ -127,12 +160,12 @@ export class CarritoComponent implements OnInit, AfterViewInit {
 
   }
 
-  applyMeses(){
+  applyMeses() {
 
-    for(let i=0; i< this.carritoLineas.length; i++){
-      if(this.carritoLineas[i].costo > 5000){
-        let lineaComp: CarritoLineaComponent | undefined = this.lineasComponent?.get(i) ;
-        lineaComp!.color='yellow';
+    for (let i = 0; i < this.carritoLineas.length; i++) {
+      if (this.carritoLineas[i].costo > 5000) {
+        let lineaComp: CarritoLineaComponent | undefined = this.lineasComponent?.get(i);
+        lineaComp!.color = 'yellow';
 
 
       }
@@ -145,7 +178,7 @@ export class CarritoComponent implements OnInit, AfterViewInit {
   //https://www.mattspaulding.org/The-Curious-Case-of-Angular-and-the-Infinite-Change-Event-Loop/
   ngAfterViewInit(): void {
 
-    setTimeout(()=> {
+    setTimeout(() => {
       this.totalComponent?.setTotal(this.total);
 
     }, 500);

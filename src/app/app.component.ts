@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { PluginsService } from './services/plugins.service';
 
 @Component({
   selector: 'app-root',
@@ -12,19 +13,24 @@ export class AppComponent implements OnInit {
 
   @ViewChild("template") template: TemplateRef<any> | null= null;
 
-  constructor(private modalService: BsModalService){
+  constructor(private modalService: BsModalService,
+    private pluginService: PluginsService){
 
   }
 
 
   ngOnInit(): void {
-    /*setTimeout(()=> {
+
+    this.pluginService.open$.subscribe((component: any)=> {
       if(this.template){
         this.modalRef = this.modalService.show(this.template);
-
       }
+    })
 
-    }, 2000);*/
+    this.pluginService.close$.subscribe(()=> {
+        this.modalRef?.hide();
+    })
+    
     
   }
  

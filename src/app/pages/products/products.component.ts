@@ -6,7 +6,7 @@ import { ProductosService } from 'src/app/services/productos.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { BreadcrumbsComponent } from 'src/app/templates/breadcrumbs/breadcrumbs.component';
 import { ProductComponent } from 'src/app/components/product/product.component';
-import { debounceTime, distinctUntilChanged, filter, map, Observable, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, mergeMap, Observable, of, tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -40,6 +40,8 @@ export class ProductsComponent implements OnInit {
 
   consulta: string = '';
   modalRef?: BsModalRef;
+
+  product$: Observable<Product[]> | undefined ;
 
   constructor(private productService: ProductosService, private carrito: CarritoService,
     private modalService: BsModalService, private render: Renderer2,
@@ -75,7 +77,7 @@ export class ProductsComponent implements OnInit {
       map((value: any)=> Number(value['category_id']))
     );
     
-    category$.subscribe((category_id: number) => {
+   /*category$.subscribe((category_id: number) => {
       this.productService.getProductos().subscribe((products: Product[]) => {
 
         this.products= products.filter(product=> {
@@ -84,7 +86,24 @@ export class ProductsComponent implements OnInit {
 
 
       });
-    })
+    })*/
+
+    this.product$ =this.activatedRoute.queryParams.pipe(
+      map((value: any)=> Number(value['category_id'])),
+      mergeMap((category_id: number)=>{
+        return this.productService.getProductos().pipe(
+          map((productos:Product[])=> {
+
+            let pds: Product[] =  productos.filter(product=> {
+              return product.categoria.idcategoria === category_id;
+            })
+            return pds;
+
+          })
+        )
+      }
+    )
+    );
 
   }
   find(event: any) {

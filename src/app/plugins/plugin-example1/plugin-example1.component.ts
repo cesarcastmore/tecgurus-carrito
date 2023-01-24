@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PluginsService } from 'src/app/services/plugins.service';
 
 @Component({
   selector: 'app-plugin-example1',
@@ -9,11 +10,20 @@ export class PluginExample1Component implements OnInit {
 
   titulo: string='Titulo';
 
-  constructor() { }
+  constructor(private pluginService: PluginsService) { }
 
   ngOnInit(): void {
 
     console.log("inicio");
   }
+
+
+  confirmar(){
+
+    this.pluginService.closePlugin();
+
+  }
+
+
 
 }
