@@ -48,9 +48,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
     } else {
       this.auth.setJwt(result.jwt);
       this.auth.correo = this.loginForm.get('username')?.value;
+      this.auth.isActive$.next(true);
       localStorage.setItem('correo', this.auth.correo);
       //this.subscriptionStatus?.unsubscribe();
       this.router.navigateByUrl('profile');
+    
     }
 
 

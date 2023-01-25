@@ -5,6 +5,7 @@ import { CarritoLineaComponent } from 'src/app/components/carrito-linea/carrito-
 import { TotalComponent } from 'src/app/components/total/total.component';
 import { CarritoLinea } from 'src/app/models/carrito-linea';
 import { Cliente } from 'src/app/models/cliente';
+import { PluginExample1Component } from 'src/app/plugins/plugin-example1/plugin-example1.component';
 import { AlertService } from 'src/app/services/alert.service';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { PluginsService } from 'src/app/services/plugins.service';
@@ -74,6 +75,7 @@ export class CarritoComponent implements OnInit, AfterViewInit {
   public confirmToRemove(carritoLinea: CarritoLinea | null) {
 
     this.pluginService.openPlugin();
+    this.pluginService.putPlugin(PluginExample1Component);
 
     this.active_to_remove=carritoLinea;
 

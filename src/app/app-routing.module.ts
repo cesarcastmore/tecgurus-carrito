@@ -15,22 +15,35 @@ import { Capitulo9Component } from './pages/capitulo9/capitulo9.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
 import { Capitulo13Component } from './pages/capitulo13/capitulo13.component';
 import { BuscadorComponent } from './pages/buscador/buscador.component';
+import { IsActiveGuard } from './guards/is-active.guard';
+import { IsLoginGuard } from './guards/is-login.guard';
+import { IsVendedorGuard } from './guards/is-vendedor.guard';
 
 const routes: Routes = [{
-  path: '', component: TecgurusComponent,
-  children: [{
+  path: '', 
+  component: TecgurusComponent,
+     children: [{
     path: '', redirectTo: 'profile', pathMatch: 'full'
   },
-  { path: 'profile', loadChildren: () => import('./pages/profile-page/profile-page.module').then(m => m.ProfilePageModule) },
+  { 
+    path: 'profile', loadChildren: () => import('./pages/profile-page/profile-page.module').then(m => m.ProfilePageModule),
+    canActivate: [IsActiveGuard] 
+
+  },
+  
   {
-    path: 'products', component: ProductsComponent
+    path: 'products', component: ProductsComponent,
+    canActivate: [IsActiveGuard]
   }, {
-    path: 'products/:id', component: ProductDetailsComponent
+    path: 'products/:id', component: ProductDetailsComponent,
+    canActivate: [IsActiveGuard]
   }, {
-    path: 'carrito', component: CarritoComponent
+    path: 'carrito', component: CarritoComponent,
+    canActivate: [IsActiveGuard]
   }, {
     path: 'inventario',
-    loadChildren: () => import('./pages/inventario-page/inventario-page.module').then(m => m.InventarioPageModule)
+    loadChildren: () => import('./pages/inventario-page/inventario-page.module').then(m => m.InventarioPageModule),
+    canActivate: [IsActiveGuard, IsVendedorGuard]
   },
   {
     path: 'capitulo2', component: Capitulo2Component
@@ -56,11 +69,14 @@ const routes: Routes = [{
     path: 'capitulo13', component: Capitulo13Component
 
   },{
-    path: 'buscador', component: BuscadorComponent
+    path: 'buscador', component: BuscadorComponent,
+    canActivate: [IsActiveGuard]
+
 
   }]
 }, {
-  path: 'login', component: LoginComponent
+  path: 'login', component: LoginComponent,
+  canActivate: [IsLoginGuard]
 }
 ];
 
