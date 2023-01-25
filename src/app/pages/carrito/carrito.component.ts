@@ -5,6 +5,7 @@ import { CarritoLineaComponent } from 'src/app/components/carrito-linea/carrito-
 import { TotalComponent } from 'src/app/components/total/total.component';
 import { CarritoLinea } from 'src/app/models/carrito-linea';
 import { Cliente } from 'src/app/models/cliente';
+import { PluginExample1Component } from 'src/app/plugins/plugin-example1/plugin-example1.component';
 import { AlertService } from 'src/app/services/alert.service';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { PluginsService } from 'src/app/services/plugins.service';
@@ -27,7 +28,7 @@ export class CarritoComponent implements OnInit, AfterViewInit {
 
   @ViewChildren(CarritoLineaComponent) lineasComponent: QueryList<CarritoLineaComponent> | null = null;
 
-  active_to_remove: CarritoLinea | null= null;
+  active_to_remove: CarritoLinea | null = null;
 
 
   total: number = 0;
@@ -75,7 +76,10 @@ export class CarritoComponent implements OnInit, AfterViewInit {
 
     this.pluginService.openPlugin();
 
-    this.active_to_remove=carritoLinea;
+    this.pluginService.putPlugin(PluginExample1Component);
+
+
+    this.active_to_remove = carritoLinea;
 
 
 
@@ -106,10 +110,10 @@ export class CarritoComponent implements OnInit, AfterViewInit {
   }
 
   public updateLinea(carritoLinea: CarritoLinea | null) {
-      let index = this.carritoLineas.findIndex(item => item.idcompraproducto === carritoLinea?.idcompraproducto);
+    let index = this.carritoLineas.findIndex(item => item.idcompraproducto === carritoLinea?.idcompraproducto);
 
 
-      if(carritoLinea != null) {
+    if (carritoLinea != null) {
       this.carritoService.update(index, carritoLinea);
       this.carritoLineas = this.carritoService.getCarritoLineas();
 
