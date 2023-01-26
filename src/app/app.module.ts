@@ -19,7 +19,7 @@ import { BuscadorPipe } from './pipes/buscador.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Capitulo7Component } from './pages/capitulo7/capitulo7.component';
 import { Capitulo9Component } from './pages/capitulo9/capitulo9.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CategorizarPipe } from './pipes/categorizar.pipe';
 import { CarritoComponent } from './pages/carrito/carrito.component';
 import { CarritoLineaComponent } from './components/carrito-linea/carrito-linea.component';
@@ -40,6 +40,7 @@ import { DropDirective } from './directives/drop.directive';
 import { ErrorDirective } from './directives/error.directive';
 import { Capitulo13Component } from './pages/capitulo13/capitulo13.component';
 import { BuscadorComponent } from './pages/buscador/buscador.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,11 @@ import { BuscadorComponent } from './pages/buscador/buscador.component';
     PluginsModule
 
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass:AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
