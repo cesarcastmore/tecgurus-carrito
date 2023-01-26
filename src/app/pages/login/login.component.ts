@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     let result = await this.auth.login(this.loginForm.value.username, this.loginForm.value.password).toPromise();
 
+
     if (result.jwt === 'Bad credentials') {
 
     } else {

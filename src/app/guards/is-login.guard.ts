@@ -6,28 +6,25 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class IsLockGuard implements CanActivate {
+export class IsLoginGuard implements CanActivate {
 
   constructor(private router: Router,
     private auth: AuthService){
 
   }
-
-
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean  {
+    state: RouterStateSnapshot): boolean {
 
-      let condicion: boolean= true;
+    if (!localStorage.getItem("jwt")) {
+      this.router.navigateByUrl('login');
+      return false;
+    } else {
+      this.auth.setJwt(localStorage.getItem('jwt') ?? '');
+      this.auth.correo = localStorage.getItem('correo') ?? ''
+    }
 
-      if(condicion){
-        this.router.navigateByUrl('');
-      }
-
-      return true;
-
-
-
+    return true;
   }
-  
+
 }

@@ -16,22 +16,28 @@ import { CarritoComponent } from './pages/carrito/carrito.component';
 import { Capitulo13Component } from './pages/capitulo13/capitulo13.component';
 import { BuscadorComponent } from './pages/buscador/buscador.component';
 import { IsLockGuard } from './guards/is-lock.guard';
+import { IsLoginGuard } from './guards/is-login.guard';
+import { IsNotLoginGuard } from './guards/is-not-login.guard';
 
 const routes: Routes = [{
   path: '', component: TecgurusComponent,
   children: [{
     path: '', redirectTo: 'profile', pathMatch: 'full'
   },
-  { path: 'profile', loadChildren: () => import('./pages/profile-page/profile-page.module').then(m => m.ProfilePageModule) },
+  { path: 'profile', loadChildren: () => import('./pages/profile-page/profile-page.module').then(m => m.ProfilePageModule),
+canActivate:[IsLoginGuard] },
   {
-    path: 'products', component: ProductsComponent
+    path: 'products', component: ProductsComponent,
+    canActivate:[IsLoginGuard]
   }, {
-    path: 'products/:id', component: ProductDetailsComponent
+    path: 'products/:id', component: ProductDetailsComponent,
+    canActivate:[IsLoginGuard]
   }, {
     path: 'carrito', component: CarritoComponent
   }, {
     path: 'inventario',
-    loadChildren: () => import('./pages/inventario-page/inventario-page.module').then(m => m.InventarioPageModule)
+    loadChildren: () => import('./pages/inventario-page/inventario-page.module').then(m => m.InventarioPageModule),
+    canActivate:[IsLoginGuard]
   },
   {
     path: 'capitulo2', component: Capitulo2Component
@@ -58,11 +64,12 @@ const routes: Routes = [{
     canActivate: [IsLockGuard]
 
   },{
-    path: 'buscador', component: BuscadorComponent
+    path: 'buscador', component: BuscadorComponent,
+    canActivate:[IsLoginGuard]
 
   }]
 }, {
-  path: 'login', component: LoginComponent
+  path: 'login', component: LoginComponent, canActivate:[IsNotLoginGuard] 
 }
 ];
 

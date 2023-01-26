@@ -16,55 +16,56 @@ import { PluginsService } from 'src/app/services/plugins.service';
 export class TecgurusComponent implements OnInit {
 
 
-  isOpen : boolean = false;
+  isOpen: boolean = false;
   title = 'tecgurus-carrito';
   notify$: Observable<Alerta> | undefined;
 
-  constructor(public alert:AlertService, private router: Router, 
-    private auth: AuthService, private pluginService: PluginsService){
+  constructor(public alert: AlertService, private router: Router,
+    private auth: AuthService, private pluginService: PluginsService) {
 
   }
 
   ngOnInit(): void {
 
-    if(!localStorage.getItem("jwt")){
-      this.router.navigateByUrl('login')
-    }else {
-      this.auth.setJwt(localStorage.getItem('jwt') ?? '');
-      this.auth.correo= localStorage.getItem('correo') ?? ''
+
+    let jwt: string = this.auth.jwt;
+    let sesion: any = this.parseJwt(jwt);
+
+    if (sesion !== null) {
+      console.log("SESION", sesion);
+
+      this.notify$ = this.alert.notify$.asObservable();
+
+      timer(moment(sesion.exp).toDate()).subscribe(() => {
+        this.pluginService.openPlugin();
+        this.pluginService.putPlugin(PluginExample2Component);
+
+
+      })
     }
 
-    let jwt: string= this.auth.jwt;
-    let sesion: any  = this.parseJwt(jwt);
-    console.log("SESION", sesion);
 
-    this.notify$ = this.alert.notify$.asObservable();
 
-    timer(moment(sesion.exp).toDate()).subscribe(()=> {
-      this.pluginService.openPlugin();
-      this.pluginService.putPlugin(PluginExample2Component);
-
-      
-    })
-
-    
-    
   }
 
 
-  openMenu(){
+  openMenu() {
     this.isOpen = !this.isOpen;
     //alert("Clic Menu");
   }
 
   public parseJwt(token: string) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+    try {
+      var base64Url = token.split('.')[1];
+      var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
+      }).join(''));
+    } catch (error) {
+      return null;
+    }
 
     return JSON.parse(jsonPayload);
-}
+  }
 
 }

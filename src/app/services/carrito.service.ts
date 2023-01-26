@@ -56,14 +56,12 @@ export class CarritoService {
 
    public getClientes():Observable<Cliente[]>{
 
-    let headers: HttpHeaders= new HttpHeaders().append('Authorization', 'Bearer '+ this.auth.jwt);
-    return this.http.get<Cliente[]>("https://curso.tgconsulting.online/minipos/api/cliente", {headers})
+    return this.http.get<Cliente[]>("https://curso.tgconsulting.online/minipos/api/cliente")
    }
 
    public completarCompra(carrito: Carrito):Observable<any>{
 
-    let headers: HttpHeaders= new HttpHeaders().append('Authorization', 'Bearer '+ this.auth.jwt);
-    return this.http.post<any>("https://curso.tgconsulting.online/minipos/api/compra",carrito, {headers})
+    return this.http.post<any>("https://curso.tgconsulting.online/minipos/api/compra",carrito )
    }
 
 }

@@ -17,14 +17,12 @@ export class ProductosService {
 
    public getProductos():Observable<Product[]> {
 
-    let headers: HttpHeaders= new HttpHeaders().append('Authorization','Bearer '+ this.auth.jwt);
-    return this.http.get<Product[]>("https://curso.tgconsulting.online/minipos/api/producto", {headers})
+    return this.http.get<Product[]>("https://curso.tgconsulting.online/minipos/api/producto")
    }
 
    public getCategorias():Observable<Categoria[]>{
 
-    let headers: HttpHeaders= new HttpHeaders().append('Authorization', 'Bearer '+ this.auth.jwt);
-    return this.http.get<Categoria[]>("https://curso.tgconsulting.online/minipos/api/categoria", {headers})
+    return this.http.get<Categoria[]>("https://curso.tgconsulting.online/minipos/api/categoria")
    }
 
 
