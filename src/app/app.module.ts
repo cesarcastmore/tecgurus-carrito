@@ -41,6 +41,9 @@ import { ErrorDirective } from './directives/error.directive';
 import { Capitulo13Component } from './pages/capitulo13/capitulo13.component';
 import { BuscadorComponent } from './pages/buscador/buscador.component';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { Capitulo15AComponent } from './capitulo15-a/capitulo15-a.component';
+import { UsuarioComponent } from './capitulo15-a/usuario/usuario.component';
+import { DireccionComponent } from './capitulo15-a/direccion/direccion.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +75,10 @@ import { AuthInterceptor } from './services/auth.interceptor';
     DropDirective,
     ErrorDirective,
     Capitulo13Component,
-    BuscadorComponent
+    BuscadorComponent,
+    Capitulo15AComponent,
+    UsuarioComponent,
+    DireccionComponent
     
   ],
   imports: [

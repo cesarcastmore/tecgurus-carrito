@@ -18,6 +18,8 @@ import { BuscadorComponent } from './pages/buscador/buscador.component';
 import { IsLockGuard } from './guards/is-lock.guard';
 import { IsLoginGuard } from './guards/is-login.guard';
 import { IsNotLoginGuard } from './guards/is-not-login.guard';
+import { ProductResolver } from './resolvers/product.resolver';
+import { Capitulo15AComponent } from './capitulo15-a/capitulo15-a.component';
 
 const routes: Routes = [{
   path: '', component: TecgurusComponent,
@@ -31,7 +33,9 @@ canActivate:[IsLoginGuard] },
     canActivate:[IsLoginGuard]
   }, {
     path: 'products/:id', component: ProductDetailsComponent,
-    canActivate:[IsLoginGuard]
+    canActivate:[IsLoginGuard], resolve: {
+      product: ProductResolver
+    }
   }, {
     path: 'carrito', component: CarritoComponent
   }, {
@@ -62,6 +66,9 @@ canActivate:[IsLoginGuard] },
   }, {
     path: 'capitulo13', component: Capitulo13Component, 
     canActivate: [IsLockGuard]
+
+  },{
+    path: 'capitulo15a', component: Capitulo15AComponent
 
   },{
     path: 'buscador', component: BuscadorComponent,

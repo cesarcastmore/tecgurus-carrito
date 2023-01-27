@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, of } from 'rxjs';
@@ -12,17 +12,23 @@ export class AuthService {
   correo: string='';
 
   constructor(private http : HttpClient,
-    private router: Router){ 
+    private router: Router, private httpBackend: HttpBackend){ 
 
   }
 
   login(username: string, password : string): Observable<any>{
-    return this.http.post<any>('https://curso.tgconsulting.online/minipos/api/login', {password:password, username:username})
+
+    let httpClient: HttpClient= new HttpClient(this.httpBackend);
+
+
+    return httpClient.post<any>('https://curso.tgconsulting.online/minipos/api/login', {password:password, username:username})
     .pipe(catchError(this.handleError));
 
   }
 
   public handleError(error: any) {
+
+    console.log(error);
   
     return of({ jwt: error.error.text});
   }

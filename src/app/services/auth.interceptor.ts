@@ -6,32 +6,39 @@ import {
   HttpInterceptor,
   HttpHeaders,
   HttpParams,
-  HttpResponse
+  HttpResponse,
+  HttpErrorResponse
 } from '@angular/common/http';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    let jwt: string=this.auth.jwt;
+    let jwt: string | null=localStorage.getItem('jwt');
 
-    let headers: HttpHeaders= new HttpHeaders();
-    if(jwt !== ''){
-      headers.append('Authorization', 'Bearer '+ this.auth.jwt);
+    /*if(jwt !== null){
+      console.log(jwt)
+      headers.set('Authorization', 'Bearer '+ jwt);
+    }*/
+
+    let req: any;
+
+    if(jwt !== null){
+      let headers: HttpHeaders= new HttpHeaders().append('Authorization', 'Bearer '+ jwt);
+
+       req = request.clone({
+        headers: headers
+      })
+    }else {
+       req = request.clone({})
     }
-    let params: HttpParams= new HttpParams(); 
-
-
-
-    let req = request.clone({
-      headers
-    })
-
+  
 
     return next.handle(req).pipe(
       tap((response: any)=> {
@@ -43,7 +50,14 @@ export class AuthInterceptor implements HttpInterceptor {
 
       }), 
       catchError((error: any)=> {
-        console.log(error);
+        
+        if(error.status === 401){
+          
+          this.router.navigateByUrl('login');
+          localStorage.clear();
+
+        }
+        
 
         return throwError(error);
 
