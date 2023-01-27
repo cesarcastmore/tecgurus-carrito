@@ -41,6 +41,11 @@ import { ErrorDirective } from './directives/error.directive';
 import { Capitulo13Component } from './pages/capitulo13/capitulo13.component';
 import { BuscadorComponent } from './pages/buscador/buscador.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { Capitulo15AComponent } from './pages/capitulo15-a/capitulo15-a.component';
+import { TabComponent } from './components/tab/tab.component';
+import { Segmento1Component } from './components/segmento1/segmento1.component';
+import { Segmento2Component } from './components/segmento2/segmento2.component';
+import { Capitulo15BComponent } from './pages/capitulo15-b/capitulo15-b.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +77,12 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     DropDirective,
     ErrorDirective,
     Capitulo13Component,
-    BuscadorComponent
+    BuscadorComponent,
+    Capitulo15AComponent,
+    TabComponent,
+    Segmento1Component,
+    Segmento2Component,
+    Capitulo15BComponent
     
   ],
   imports: [

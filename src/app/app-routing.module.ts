@@ -18,6 +18,8 @@ import { BuscadorComponent } from './pages/buscador/buscador.component';
 import { IsActiveGuard } from './guards/is-active.guard';
 import { IsLoginGuard } from './guards/is-login.guard';
 import { IsVendedorGuard } from './guards/is-vendedor.guard';
+import { Capitulo15AComponent } from './pages/capitulo15-a/capitulo15-a.component';
+import { Capitulo15BComponent } from './pages/capitulo15-b/capitulo15-b.component';
 
 const routes: Routes = [{
   path: '', 
@@ -67,6 +69,12 @@ const routes: Routes = [{
 
   }, {
     path: 'capitulo13', component: Capitulo13Component
+
+  } ,{
+    path: 'capitulo15-a', component: Capitulo15AComponent
+
+  },{
+    path: 'capitulo15-b', component: Capitulo15BComponent
 
   },{
     path: 'buscador', component: BuscadorComponent,
