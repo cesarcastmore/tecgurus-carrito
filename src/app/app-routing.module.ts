@@ -20,6 +20,8 @@ import { IsLoginGuard } from './guards/is-login.guard';
 import { IsVendedorGuard } from './guards/is-vendedor.guard';
 import { Capitulo15AComponent } from './pages/capitulo15-a/capitulo15-a.component';
 import { Capitulo15BComponent } from './pages/capitulo15-b/capitulo15-b.component';
+import { ProductoResolver } from './resolvers/producto.resolver';
+import { Capitulo15CComponent } from './pages/capitulo15-c/capitulo15-c.component';
 
 const routes: Routes = [{
   path: '', 
@@ -36,9 +38,14 @@ const routes: Routes = [{
   {
     path: 'products', component: ProductsComponent,
     canActivate: [IsActiveGuard]
+
+    
   }, {
     path: 'products/:id', component: ProductDetailsComponent,
-    canActivate: [IsActiveGuard]
+    canActivate: [IsActiveGuard],
+    resolve: {
+      producto: ProductoResolver
+    }
   }, {
     path: 'carrito', component: CarritoComponent,
     canActivate: [IsActiveGuard]
@@ -74,7 +81,7 @@ const routes: Routes = [{
     path: 'capitulo15-a', component: Capitulo15AComponent
 
   },{
-    path: 'capitulo15-b', component: Capitulo15BComponent
+    path: 'capitulo15-c', component: Capitulo15CComponent
 
   },{
     path: 'buscador', component: BuscadorComponent,

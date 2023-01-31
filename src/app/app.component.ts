@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.pluginService.open$.subscribe((component: any)=> {
+    /*this.pluginService.open$.subscribe((component: any)=> {
       if(this.template){
         this.modalRef = this.modalService.show(this.template);
       }
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
 
     this.pluginService.close$.subscribe(()=> {
         this.modalRef?.hide();
-    })
+    })*/
     
     
   }

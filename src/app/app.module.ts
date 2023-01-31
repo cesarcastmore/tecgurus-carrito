@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -46,6 +46,12 @@ import { TabComponent } from './components/tab/tab.component';
 import { Segmento1Component } from './components/segmento1/segmento1.component';
 import { Segmento2Component } from './components/segmento2/segmento2.component';
 import { Capitulo15BComponent } from './pages/capitulo15-b/capitulo15-b.component';
+import { CardComponent } from './components/card/card.component';
+import { Capitulo15CComponent } from './pages/capitulo15-c/capitulo15-c.component';
+
+import { StoreModule } from '@ngrx/store';
+import {loadingReducer} from './store/loading.reducer'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -82,7 +88,9 @@ import { Capitulo15BComponent } from './pages/capitulo15-b/capitulo15-b.componen
     TabComponent,
     Segmento1Component,
     Segmento2Component,
-    Capitulo15BComponent
+    Capitulo15BComponent,
+    CardComponent,
+    Capitulo15CComponent
     
   ],
   imports: [
@@ -95,7 +103,13 @@ import { Capitulo15BComponent } from './pages/capitulo15-b/capitulo15-b.componen
     ButtonsModule,
     ModalModule.forRoot(),
     TemplatesModule,
-    PluginsModule
+    PluginsModule,
+    StoreModule.forRoot({ loading: loadingReducer }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: !isDevMode(), 
+      autoPause: true
+    })
 
   ],
   providers: [{

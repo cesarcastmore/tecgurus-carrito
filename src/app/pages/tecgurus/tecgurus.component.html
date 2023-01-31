@@ -1,4 +1,9 @@
-<div class="wrapper">
+<div class="spinner-border" role="status" [hidden]="!(isLoading$ | async)">
+  <span class="sr-only">Loading...</span>
+</div>
+
+
+<div class="wrapper" [hidden]="(isLoading$ | async)">
   <nav id="sidebar" [ngClass]="{'hiden': !isOpen, 'show': isOpen}">
       <app-menu-list></app-menu-list>
     </nav>

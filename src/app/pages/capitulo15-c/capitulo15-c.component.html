@@ -1,0 +1,15 @@
+{{ address | json }}
+<div [formGroup]="formItem">
+    <input class="form-control" formControlName="name">
+    <input class="form-control" formControlName="street">
+  </div>
+  
+  <div class="row">
+    <div class="col-md-6">
+      <app-segmento1 [usuario]="user"></app-segmento1>
+    </div>
+    <div class="col-md-6">
+      <app-segmento2 [address]="address"></app-segmento2>
+  
+    </div>
+  </div>

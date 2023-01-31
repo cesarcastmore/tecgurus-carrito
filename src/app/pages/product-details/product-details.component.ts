@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ProductCommentsComponent } from 'src/app/components/product-comments/product-comments.component';
 import { ProductDescriptionComponent } from 'src/app/components/product-description/product-description.component';
 import { ProductQuestionsComponent } from 'src/app/components/product-questions/product-questions.component';
+import { Product } from 'src/app/models/product';
 
 @Component({
   selector: 'app-product-details',
@@ -24,6 +26,8 @@ export class ProductDetailsComponent implements OnInit {
     type: 'questions'
   }]
 
+  product: Product | undefined;
+
 
   constructor(private route: ActivatedRoute, private factory: ComponentFactoryResolver) {
 
@@ -31,7 +35,12 @@ export class ProductDetailsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+
+  this.route.data.subscribe((data: any)=> {
+    console.log(data);
+    this.product = data.producto;
+  })
+   
 
 
     for (let linea of this.diccionario) {

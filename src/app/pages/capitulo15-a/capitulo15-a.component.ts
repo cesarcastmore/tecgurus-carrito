@@ -33,13 +33,13 @@ export class Capitulo15AComponent implements OnInit {
   ngOnInit(): void {
 
     this.formItem.get('name')?.valueChanges.subscribe(name=> {
-      this.user= {...this.user, name: name };
+      this.user.name= name;
 
     })
 
     
     this.formItem.get('street')?.valueChanges.subscribe(name=> {
-      this.address.street= name;
+      this.address= {...this.address, name: name};
 
     })
 
