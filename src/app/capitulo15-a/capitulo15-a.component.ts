@@ -59,6 +59,17 @@ export class Capitulo15AComponent implements OnInit {
     this.sonIguales(a4, b4);
 
 
+    this.formItem.get('calle')?.valueChanges.subscribe((calle: any)=> {
+      this.direccion = {...this.direccion, calle: calle};
+
+    })
+
+    this.formItem.get('nombre')?.valueChanges.subscribe((nombre: any)=> {
+
+      this.usuario ={...this.usuario, nombre: nombre};
+
+    })
+
 
 
   }

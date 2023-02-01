@@ -4,13 +4,15 @@ import { Observable } from 'rxjs';
 import { Categoria } from '../models/categoria';
 import { Product } from '../models/product';
 import { AuthService } from './auth.service';
+import { DatabaseService } from './database.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductosService {
 
-  constructor(private http: HttpClient, private auth: AuthService) {
+  constructor(private http: HttpClient, private auth: AuthService, 
+    private db: DatabaseService<Product>) {
 
    }
 
@@ -23,6 +25,15 @@ export class ProductosService {
    public getCategorias():Observable<Categoria[]>{
 
     return this.http.get<Categoria[]>("https://curso.tgconsulting.online/minipos/api/categoria")
+   }
+
+
+   save():Observable<Product>{
+
+    return this.db.save();
+
+  
+
    }
 
 

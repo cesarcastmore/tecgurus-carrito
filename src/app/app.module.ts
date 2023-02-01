@@ -44,6 +44,12 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { Capitulo15AComponent } from './capitulo15-a/capitulo15-a.component';
 import { UsuarioComponent } from './capitulo15-a/usuario/usuario.component';
 import { DireccionComponent } from './capitulo15-a/direccion/direccion.component';
+import { Component15AaComponent } from './pages/component15-aa/component15-aa.component';
+import { Tab1Component } from './components/tab1/tab1.component';
+import { Tab2Component } from './components/tab2/tab2.component';
+import { Tab3Component } from './components/tab3/tab3.component';
+import { Component15BComponent } from './pages/component15-b/component15-b.component';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +84,13 @@ import { DireccionComponent } from './capitulo15-a/direccion/direccion.component
     BuscadorComponent,
     Capitulo15AComponent,
     UsuarioComponent,
-    DireccionComponent
+    DireccionComponent,
+    Component15AaComponent,
+    Tab1Component,
+    Tab2Component,
+    Tab3Component,
+    Component15BComponent,
+    CardComponent
     
   ],
   imports: [

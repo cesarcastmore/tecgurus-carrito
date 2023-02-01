@@ -26,7 +26,7 @@ export class ProductDetailsComponent implements OnInit {
     type: 'questions'
   }]
 
-  product$: Observable<Product| null> | null= null;
+  product: Product | null= null;
 
   constructor(private route: ActivatedRoute, private factory: ComponentFactoryResolver) {
 
@@ -34,13 +34,17 @@ export class ProductDetailsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
 
-    this.product$ = this.route.snapshot.data['product'];
+     this.route.data.subscribe((resolver: any)=> {
 
-    this.product$?.subscribe(item=> {
+      this.product= resolver.product;
+
+
+     });
+
+    /*this.product$?.subscribe(item=> {
       console.log(item);
-    })
+    })*/
 
 
     for (let linea of this.diccionario) {

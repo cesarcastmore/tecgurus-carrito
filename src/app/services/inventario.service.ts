@@ -14,8 +14,7 @@ export class InventarioService {
 
   public getInventario():Observable<Inventario[]>{
 
-    let headers: HttpHeaders= new HttpHeaders().append('Authorization', 'Bearer '+ this.auth.jwt);
-    return this.http.get<Inventario[]>("https://curso.tgconsulting.online/minipos/api/compra/inventario", {headers})
+    return this.http.get<Inventario[]>("https://curso.tgconsulting.online/minipos/api/compra/inventario")
    }
 
 }

@@ -20,6 +20,9 @@ import { IsLoginGuard } from './guards/is-login.guard';
 import { IsNotLoginGuard } from './guards/is-not-login.guard';
 import { ProductResolver } from './resolvers/product.resolver';
 import { Capitulo15AComponent } from './capitulo15-a/capitulo15-a.component';
+import { ClientesResolver } from './resolvers/clientes.resolver';
+import { Component15AaComponent } from './pages/component15-aa/component15-aa.component';
+import { Component15BComponent } from './pages/component15-b/component15-b.component';
 
 const routes: Routes = [{
   path: '', component: TecgurusComponent,
@@ -37,7 +40,10 @@ canActivate:[IsLoginGuard] },
       product: ProductResolver
     }
   }, {
-    path: 'carrito', component: CarritoComponent
+    path: 'carrito', component: CarritoComponent,
+    resolve: {
+      clientes: ClientesResolver
+    }
   }, {
     path: 'inventario',
     loadChildren: () => import('./pages/inventario-page/inventario-page.module').then(m => m.InventarioPageModule),
@@ -69,6 +75,12 @@ canActivate:[IsLoginGuard] },
 
   },{
     path: 'capitulo15a', component: Capitulo15AComponent
+
+  },{
+    path: 'capitulo15aa', component: Component15AaComponent
+
+  },{
+    path: 'capitulo15b', component: Component15BComponent
 
   },{
     path: 'buscador', component: BuscadorComponent,

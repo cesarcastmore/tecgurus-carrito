@@ -1,0 +1,17 @@
+<nav class="nav nav-pills nav-justified">
+    <a class="nav-item nav-link" href="javascript:void(0)" (click)="show(1)">Link</a>
+    <a class="nav-item nav-link" href="javascript:void(0)" (click)="show(2)">Link</a>
+    <a class="nav-item nav-link" href="javascript:void(0)" (click)="show(3)">Disabled</a>
+</nav>
+<div [hidden]="!(option.selected !==2 && option.selected !==3)">
+    <app-tab1 [data]="option.tab1.data"></app-tab1>
+</div>
+
+<div [hidden]="!(option.selected !==1 && option.selected !==3)">
+    <app-tab2 [data]="option.tab2.data"></app-tab2>
+</div>
+
+
+<div [hidden]="!(option.selected !==1 && option.selected !==2)">
+    <app-tab3 [data]="option.tab3.data"></app-tab3>
+</div>

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CarritoLineaComponent } from 'src/app/components/carrito-linea/carrito-linea.component';
 import { TotalComponent } from 'src/app/components/total/total.component';
@@ -18,7 +19,7 @@ import { PluginsService } from 'src/app/services/plugins.service';
 export class CarritoComponent implements OnInit, AfterViewInit {
 
   carritoLineas: CarritoLinea[] = [];
-  clientes$: Observable<Cliente[]> | null = null;
+  clientes: Cliente[]  = [];
 
   @ViewChild('inputDom') inputDom: ElementRef<HTMLInputElement> | null = null;
 
@@ -43,7 +44,7 @@ export class CarritoComponent implements OnInit, AfterViewInit {
 
   constructor(private carritoService: CarritoService,
     private notif: AlertService, private render: Renderer2,
-    private pluginService: PluginsService) { }
+    private pluginService: PluginsService, private router: ActivatedRoute) { }
 
 
   ngOnInit(): void {
@@ -53,7 +54,12 @@ export class CarritoComponent implements OnInit, AfterViewInit {
       this.total = this.total + (item.cantidad * item.costo);
     });
 
-    this.clientes$ = this.carritoService.getClientes();
+
+    this.router.data.subscribe((data: any)=> {
+      this.clientes= data.clientes;
+    })
+
+
 
     this.promoForm.valueChanges.subscribe(value => {
       console.log(value);

@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-direccion',
   templateUrl: './direccion.component.html',
-  styleUrls: ['./direccion.component.css']
+  styleUrls: ['./direccion.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DireccionComponent implements OnInit {
   @Input() direccion: any;
