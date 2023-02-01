@@ -9,6 +9,7 @@ import { PluginExample2Component } from 'src/app/plugins/plugin-example2/plugin-
 import { Store } from '@ngrx/store';
 import { LoadingState} from '../../store/loading.reducer';
 import { closeLoading} from '../../store/loading.action';
+import { AlertState } from 'src/app/store/alert.reducer';
 
 @Component({
   selector: 'app-tecgurus',
@@ -25,13 +26,14 @@ export class TecgurusComponent implements OnInit {
 
   constructor(public alert:AlertService, private router: Router, 
     private auth: AuthService, private pluginService: PluginsService,
-    private store$: Store<{ loading: LoadingState }>){
+    private store$: Store<{ loading: LoadingState, alert: AlertState }>){
 
   }
 
   ngOnInit(): void {
 
     this.isLoading$ = this.store$.select(state=> state.loading.isLoading);
+    
     /*setTimeout(()=> {
 
         this.store$.dispatch(closeLoading());

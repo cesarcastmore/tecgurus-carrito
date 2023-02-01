@@ -52,6 +52,7 @@ import { Capitulo15CComponent } from './pages/capitulo15-c/capitulo15-c.componen
 import { StoreModule } from '@ngrx/store';
 import {loadingReducer} from './store/loading.reducer'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { alertReducer } from './store/alert.reducer';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     ModalModule.forRoot(),
     TemplatesModule,
     PluginsModule,
-    StoreModule.forRoot({ loading: loadingReducer }),
+    StoreModule.forRoot({ loading: loadingReducer, alert: alertReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: !isDevMode(), 
