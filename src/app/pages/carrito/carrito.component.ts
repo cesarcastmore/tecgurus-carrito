@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CarritoLineaComponent } from 'src/app/components/carrito-linea/carrito-linea.component';
 import { TotalComponent } from 'src/app/components/total/total.component';
@@ -10,6 +11,7 @@ import { PluginExample1Component } from 'src/app/plugins/plugin-example1/plugin-
 import { AlertService } from 'src/app/services/alert.service';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { PluginsService } from 'src/app/services/plugins.service';
+import { closeLoading} from '../../store/loading.actions';
 
 @Component({
   selector: 'app-carrito',
@@ -44,7 +46,8 @@ export class CarritoComponent implements OnInit, AfterViewInit {
 
   constructor(private carritoService: CarritoService,
     private notif: AlertService, private render: Renderer2,
-    private pluginService: PluginsService, private router: ActivatedRoute) { }
+    private pluginService: PluginsService, private router: ActivatedRoute,
+    private store: Store<any>) { }
 
 
   ngOnInit(): void {
@@ -56,10 +59,15 @@ export class CarritoComponent implements OnInit, AfterViewInit {
 
 
     this.router.data.subscribe((data: any)=> {
-      this.clientes= data.clientes;
+      this.clientes= data.clientes;     
+
     })
 
+    setTimeout(()=> {
+      this.store.dispatch(closeLoading());
+    }, 2000);
 
+ 
 
     this.promoForm.valueChanges.subscribe(value => {
       console.log(value);

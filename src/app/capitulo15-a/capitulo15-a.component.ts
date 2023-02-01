@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { debounceTime } from 'rxjs';
+import { DireccionComponent } from './direccion/direccion.component';
+import { UsuarioComponent } from './usuario/usuario.component';
 
 @Component({
   selector: 'app-capitulo15-a',
@@ -12,6 +15,9 @@ export class Capitulo15AComponent implements OnInit {
     nombre: new FormControl(),
     calle: new FormControl()
   })
+
+  @ViewChild(DireccionComponent) direccionComponent: DireccionComponent | null= null;
+  @ViewChild(UsuarioComponent) usuarioComponent: UsuarioComponent | null= null;
 
   direccion: any={
     calle: ''
@@ -59,15 +65,18 @@ export class Capitulo15AComponent implements OnInit {
     this.sonIguales(a4, b4);
 
 
-    this.formItem.get('calle')?.valueChanges.subscribe((calle: any)=> {
-      this.direccion = {...this.direccion, calle: calle};
-
+    this.formItem.get('calle')?.valueChanges
+    .pipe(
+      debounceTime(1000)
+    ).subscribe((calle: any)=> {
+      this.direccion.calle = calle;
+      //this.direccion= {...this.direccion, calle: calle}
+      this.direccionComponent?.update();
     })
 
     this.formItem.get('nombre')?.valueChanges.subscribe((nombre: any)=> {
-
-      this.usuario ={...this.usuario, nombre: nombre};
-
+      this.usuario.nombre = nombre;
+      this.usuarioComponent?.update();
     })
 
 

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-usuario',
@@ -14,7 +14,9 @@ export class UsuarioComponent implements OnInit {
 
   @Input() usuario: any;
 
-  constructor() { }
+  constructor(private detector: ChangeDetectorRef) { 
+    
+  }
 
   ngOnInit(): void {
   }
@@ -24,5 +26,8 @@ export class UsuarioComponent implements OnInit {
     console.log("renderice usuario");
   }
 
+  public update(){
+    this.detector.detectChanges();
+  }
 
 }

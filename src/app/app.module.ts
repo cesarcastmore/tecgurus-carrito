@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { isDevMode, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -50,6 +50,9 @@ import { Tab2Component } from './components/tab2/tab2.component';
 import { Tab3Component } from './components/tab3/tab3.component';
 import { Component15BComponent } from './pages/component15-b/component15-b.component';
 import { CardComponent } from './components/card/card.component';
+import { StoreModule } from '@ngrx/store';
+import { loadingReducer } from './store/loading.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -103,7 +106,15 @@ import { CardComponent } from './components/card/card.component';
     ButtonsModule,
     ModalModule.forRoot(),
     TemplatesModule,
-    PluginsModule
+    PluginsModule, 
+    StoreModule.forRoot({
+      loading: loadingReducer
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: !isDevMode(), // Restrict extension to log-only mode
+      autoPause: true // Pauses recording actions and state changes when the extension window is not open
+    })
 
   ],
   providers: [{

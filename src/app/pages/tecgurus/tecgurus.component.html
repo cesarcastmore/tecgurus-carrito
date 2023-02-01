@@ -1,4 +1,6 @@
-<div class="wrapper">
+
+<div [hidden]="!(isLoading$ | async)">LOADING...</div>
+<div class="wrapper" [hidden]="(isLoading$ | async) ">
   <nav id="sidebar" [ngClass]="{'hiden': !isOpen, 'show': isOpen}">
     <app-menu-list></app-menu-list>
   </nav>

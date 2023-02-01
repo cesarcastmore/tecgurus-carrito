@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-tab1',
@@ -10,13 +10,17 @@ export class Tab1Component implements OnInit {
 
   @Input() data: any;
 
-  constructor() { }
+  constructor(private detector: ChangeDetectorRef) { }
 
   ngOnInit(): void {
   }
 
   print(){
     console.log("tab1")
+  }
+
+  update(){
+    this.detector.detectChanges();
   }
 
 }

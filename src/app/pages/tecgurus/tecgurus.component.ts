@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import * as moment from 'moment';
-import { Observable, timer } from 'rxjs';
+import { map, Observable, of, timer } from 'rxjs';
 import { Alerta } from 'src/app/models/alert';
 import { PluginExample2Component } from 'src/app/plugins/plugin-example2/plugin-example2.component';
 import { AlertService } from 'src/app/services/alert.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { PluginsService } from 'src/app/services/plugins.service';
+import { LoadingState } from 'src/app/store/loading.reducer';
 
 @Component({
   selector: 'app-tecgurus',
@@ -20,12 +22,19 @@ export class TecgurusComponent implements OnInit {
   title = 'tecgurus-carrito';
   notify$: Observable<Alerta> | undefined;
 
+  isLoading$: Observable<boolean>= of(false);
+
   constructor(public alert: AlertService, private router: Router,
-    private auth: AuthService, private pluginService: PluginsService) {
+    private auth: AuthService, private pluginService: PluginsService,
+    private store: Store<{loading: LoadingState}>) {
 
   }
 
   ngOnInit(): void {
+
+    this.isLoading$= this.store.select(state=> state.loading).pipe(
+      map(state=>  state.isLoading)
+    );
 
 
     let jwt: string = this.auth.jwt;
