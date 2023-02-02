@@ -9,6 +9,8 @@ import { ProductComponent } from 'src/app/components/product/product.component';
 import { debounceTime, distinctUntilChanged, filter, map, mergeMap, Observable, of, tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { closeLoading } from 'src/app/store/loading.actions';
 
 @Component({
   selector: 'app-products',
@@ -45,11 +47,15 @@ export class ProductsComponent implements OnInit {
 
   constructor(private productService: ProductosService, private carrito: CarritoService,
     private modalService: BsModalService, private render: Renderer2,
-    private router: Router, private activatedRoute: ActivatedRoute) {
+    private router: Router, private activatedRoute: ActivatedRoute,
+    private store: Store<any>) {
 
   }
 
   ngOnInit(): void {
+
+
+    this.store.dispatch(closeLoading());
 
     this.query$ = this.searchForm.get('query')?.valueChanges
     .pipe(

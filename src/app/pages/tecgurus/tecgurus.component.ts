@@ -8,6 +8,7 @@ import { PluginExample2Component } from 'src/app/plugins/plugin-example2/plugin-
 import { AlertService } from 'src/app/services/alert.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { PluginsService } from 'src/app/services/plugins.service';
+import { AlertState } from 'src/app/store/alert.reducer';
 import { LoadingState } from 'src/app/store/loading.reducer';
 
 @Component({
@@ -22,11 +23,13 @@ export class TecgurusComponent implements OnInit {
   title = 'tecgurus-carrito';
   notify$: Observable<Alerta> | undefined;
 
+  alert$: Observable<AlertState> | null= null;
+
   isLoading$: Observable<boolean>= of(false);
 
   constructor(public alert: AlertService, private router: Router,
     private auth: AuthService, private pluginService: PluginsService,
-    private store: Store<{loading: LoadingState}>) {
+    private store: Store<{loading: LoadingState, alert: AlertState}>) {
 
   }
 
@@ -35,6 +38,8 @@ export class TecgurusComponent implements OnInit {
     this.isLoading$= this.store.select(state=> state.loading).pipe(
       map(state=>  state.isLoading)
     );
+
+    this.alert$ = this.store.select(state=> state.alert);
 
 
     let jwt: string = this.auth.jwt;

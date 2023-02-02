@@ -57,6 +57,9 @@ export class CarritoComponent implements OnInit, AfterViewInit {
       this.total = this.total + (item.cantidad * item.costo);
     });
 
+    this.store.dispatch(closeLoading());
+
+
 
     this.router.data.subscribe((data: any)=> {
       this.clientes= data.clientes;     

@@ -1,4 +1,10 @@
 
+<div *ngIf="(alert$  | async) as alerta">
+  <div class="alert alert-{{alerta.types}}" role="alert" *ngIf="alerta.isOpen">
+     {{alerta.message}}
+  </div>
+</div>
+
 <div [hidden]="!(isLoading$ | async)">LOADING...</div>
 <div class="wrapper" [hidden]="(isLoading$ | async) ">
   <nav id="sidebar" [ngClass]="{'hiden': !isOpen, 'show': isOpen}">

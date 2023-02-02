@@ -53,6 +53,8 @@ import { CardComponent } from './components/card/card.component';
 import { StoreModule } from '@ngrx/store';
 import { loadingReducer } from './store/loading.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { alertReducer } from './store/alert.reducer';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -108,13 +110,15 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     TemplatesModule,
     PluginsModule, 
     StoreModule.forRoot({
-      loading: loadingReducer
+      loading: loadingReducer,
+      alert: alertReducer
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
       autoPause: true // Pauses recording actions and state changes when the extension window is not open
-    })
+    }),  
+    EffectsModule.forRoot([])
 
   ],
   providers: [{
