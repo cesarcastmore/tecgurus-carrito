@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Profile } from 'src/app/models/profile';
 import { AlertService } from 'src/app/services/alert.service';
 import { Router} from '@angular/router';
+import { Store } from '@ngrx/store';
+import { closeLoading } from 'src/app/store/loading.action';
 
 @Component({
   selector: 'app-profile',
@@ -28,12 +30,15 @@ export class ProfileComponent implements OnInit {
     display : 'none'
   }
 
-  constructor(private alert:AlertService, private router: Router) { }
+  constructor(private alert:AlertService, private router: Router, 
+    private store: Store) { }
 
   ngOnInit(): void {
     setTimeout(()=>{
       this.alert.notify('success','Se ha cargado la informacion del perfil')
     },500)
+
+    this.store.dispatch(closeLoading());
     
   }
 

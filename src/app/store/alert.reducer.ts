@@ -23,6 +23,6 @@ export const alertReducer= createReducer(
         return {...state, message: '', open: false, tipo: ''};
     }), 
     on(actions.openAlert, (state, {message, tipo})=> {
-        return {...state, message: message, tipo: tipo};
+        return {...state, message: message, tipo: tipo, open: true};
     })
 )

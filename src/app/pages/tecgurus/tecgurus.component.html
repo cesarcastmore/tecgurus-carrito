@@ -2,8 +2,11 @@
   <span class="sr-only">Loading...</span>
 </div>
 
-<div>
+<div *ngIf="(alert$ | async) as alerta">
   
+  <div class="alert alert-{{alerta.tipo}}" role="alert" [hidden]="!alerta.open">
+     {{alerta.message}}
+  </div>
 </div>
 
 

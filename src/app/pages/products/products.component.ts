@@ -12,6 +12,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { LoadingState } from '../../store/loading.reducer';
 import { Store } from '@ngrx/store';
 import { closeLoading } from '../../store/loading.action';
+import { openAlert } from 'src/app/store/alert.actions';
 
 @Component({
   selector: 'app-products',
@@ -54,6 +55,8 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.store$.dispatch(closeLoading());
 
     this.query$ = this.searchForm.get('query')?.valueChanges
     .pipe(
@@ -143,6 +146,11 @@ export class ProductsComponent implements OnInit {
       idcompraproducto: Math.random()
 
     })
+
+    this.store$.dispatch(openAlert({
+      message: 'Se ha subido el producto',
+      tipo: 'success'
+    }))
 
   }
 

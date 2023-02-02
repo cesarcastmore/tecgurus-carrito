@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Product } from 'src/app/models/product';
 import { CarritoService } from 'src/app/services/carrito.service';
+import { openAlert } from 'src/app/store/alert.actions';
 
 @Component({
   selector: 'app-product',
@@ -11,7 +13,8 @@ export class ProductComponent implements OnInit {
 
   @Input() product: Product | null = null;
 
-  constructor(private carrito: CarritoService) { }
+  constructor(private carrito: CarritoService,
+    private store$: Store<any>) { }
 
   ngOnInit(): void {
   }
@@ -26,7 +29,14 @@ export class ProductComponent implements OnInit {
         idcompraproducto: Math.random()
 
       })
+
+      this.store$.dispatch(openAlert({
+        message: 'Se ha subido el producto',
+        tipo: 'success'
+      }))
     }
+
+
 
   }
 

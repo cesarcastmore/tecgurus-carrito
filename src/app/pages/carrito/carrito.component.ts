@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CarritoLineaComponent } from 'src/app/components/carrito-linea/carrito-linea.component';
 import { TotalComponent } from 'src/app/components/total/total.component';
@@ -9,6 +10,8 @@ import { PluginExample1Component } from 'src/app/plugins/plugin-example1/plugin-
 import { AlertService } from 'src/app/services/alert.service';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { PluginsService } from 'src/app/services/plugins.service';
+
+import { openAlert } from 'src/app/store/alert.actions';
 
 @Component({
   selector: 'app-carrito',
@@ -43,7 +46,7 @@ export class CarritoComponent implements OnInit, AfterViewInit {
 
   constructor(private carritoService: CarritoService,
     private notif: AlertService, private render: Renderer2,
-    private pluginService: PluginsService) { }
+    private pluginService: PluginsService, private store: Store<any>) { }
 
 
   ngOnInit(): void {
@@ -159,6 +162,11 @@ export class CarritoComponent implements OnInit, AfterViewInit {
   applyPromo() {
 
     this.totalComponent?.promo();
+    this.store.dispatch(openAlert({
+      message: 'Aplico promociones',
+      tipo: 'succcess'
+    }))
+
 
   }
 

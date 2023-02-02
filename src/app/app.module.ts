@@ -53,6 +53,8 @@ import { StoreModule } from '@ngrx/store';
 import {loadingReducer} from './store/loading.reducer'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { alertReducer } from './store/alert.reducer';
+import { AlertEffects } from './store/alert.effects';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -110,7 +112,9 @@ import { alertReducer } from './store/alert.reducer';
       maxAge: 25,
       logOnly: !isDevMode(), 
       autoPause: true
-    })
+    }),
+    EffectsModule.forRoot([AlertEffects])
+
 
   ],
   providers: [{

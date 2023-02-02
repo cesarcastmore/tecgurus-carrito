@@ -24,6 +24,8 @@ export class TecgurusComponent implements OnInit {
 
   isLoading$: Observable<boolean > = of(true);
 
+  alert$: Observable<AlertState> | null= null;
+
   constructor(public alert:AlertService, private router: Router, 
     private auth: AuthService, private pluginService: PluginsService,
     private store$: Store<{ loading: LoadingState, alert: AlertState }>){
@@ -39,6 +41,8 @@ export class TecgurusComponent implements OnInit {
         this.store$.dispatch(closeLoading());
       
     }, 4000)*/
+
+    this.alert$ = this.store$.select(state=> state.alert);
     
   }
 
