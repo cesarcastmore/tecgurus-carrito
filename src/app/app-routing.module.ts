@@ -23,6 +23,8 @@ import { Capitulo15AComponent } from './capitulo15-a/capitulo15-a.component';
 import { ClientesResolver } from './resolvers/clientes.resolver';
 import { Component15AaComponent } from './pages/component15-aa/component15-aa.component';
 import { Component15BComponent } from './pages/component15-b/component15-b.component';
+import { Capitulo16Component } from './pages/capitulo16/capitulo16.component';
+import { Capitulo17Component } from './pages/capitulo17/capitulo17.component';
 
 const routes: Routes = [{
   path: '', component: TecgurusComponent,
@@ -83,6 +85,13 @@ canActivate:[IsLoginGuard] },
     path: 'capitulo15b', component: Component15BComponent
 
   },{
+    path: 'capitulo16', component: Capitulo16Component
+  },
+  {
+    path: 'capitulo17', component: Capitulo17Component
+  }
+
+  ,{
     path: 'buscador', component: BuscadorComponent,
     canActivate:[IsLoginGuard]
 

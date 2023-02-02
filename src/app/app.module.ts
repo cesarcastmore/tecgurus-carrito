@@ -55,6 +55,11 @@ import { loadingReducer } from './store/loading.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { alertReducer } from './store/alert.reducer';
 import { EffectsModule } from '@ngrx/effects';
+import { AlertEffects } from './store/alert.effects';
+import { productReducer } from './store/product.reducer';
+import { Capitulo16Component } from './pages/capitulo16/capitulo16.component';
+import { ProductsEffects } from './store/products.effect';
+import { Capitulo17Component } from './pages/capitulo17/capitulo17.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +100,9 @@ import { EffectsModule } from '@ngrx/effects';
     Tab2Component,
     Tab3Component,
     Component15BComponent,
-    CardComponent
+    CardComponent,
+    Capitulo16Component,
+    Capitulo17Component
     
   ],
   imports: [
@@ -111,14 +118,15 @@ import { EffectsModule } from '@ngrx/effects';
     PluginsModule, 
     StoreModule.forRoot({
       loading: loadingReducer,
-      alert: alertReducer
+      alert: alertReducer,
+      products: productReducer
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
       autoPause: true // Pauses recording actions and state changes when the extension window is not open
     }),  
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([AlertEffects, ProductsEffects])
 
   ],
   providers: [{
@@ -129,3 +137,4 @@ import { EffectsModule } from '@ngrx/effects';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
